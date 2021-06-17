@@ -15,9 +15,22 @@
         <tbody>
             {{#each warr}}
             <tr>
-                <td>{{warrId}}</td>
-                <td>{{warrName}}</td>
-                <td>{{prodId}}</td>
+                <td>{{_id}}</td>
+                <td>{{name}}</td>
+                <td>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="productsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Product Ids
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                            {{#each productIds}}
+                                <a class="dropdown-item" href="/product/display">{{this}}</a>
+                            {{else}}
+                                <h6>No products</h6>
+                            {{/each}}
+                        </div>
+                    </div>
+                </td>
                 <td>{{duration}}</td>
                 <td>{{resolution}}</td>
                 <td>{{type}}</td>

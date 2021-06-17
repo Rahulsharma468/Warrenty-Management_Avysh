@@ -1,29 +1,30 @@
 <h1 style="text-align: center; color: black" class="mt-4">Products</h1>
 <div class="jumbotron">
+    <h6 class="text-danger">{{error}}</h6>
     <form action="/product" method="post">
         <div class="form-floating mb-3 mt-4">
             <input type="text" class="form-control" id="name" name="name" placeholder="Product Name" />
-            <label for="name">Product Name</label>
+            <label for="name">Product Name *</label>
         </div>
 
         <div class="form-floating mb-3 mt-4">
             <input type="number" class="form-control" id="price" name="price" placeholder="Product Price" />
-            <label for="price">Product Price</label>
+            <label for="price">Product Price *</label>
         </div>
 
         <div class="form-floating mb-3 mt-4">
             <input type="text" class="form-control" id="category" name="category" placeholder="Product Category" />
-            <label for="category">Product Category</label>
+            <label for="category">Product Category *</label>
         </div>
 
         <div class="form-floating mb-3 mt-4">
             <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Product Quantity" />
-            <label for="quantity">Product Quantity</label>
+            <label for="quantity">Product Quantity *</label>
         </div>
 
         <div class="form-floating mb-3 mt-4">
             <input type="text" class="form-control" id="description" name="description" placeholder="Product Description" />
-            <label for="description">Product Description</label>
+            <label for="description">Product Description *</label>
         </div>
         
         <div class="text-center" >

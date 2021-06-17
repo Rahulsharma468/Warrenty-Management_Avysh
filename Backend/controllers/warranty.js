@@ -1,59 +1,47 @@
 const Warranty = require("../models/warranty");
+const { checkForLength, getProducts } = require("./helper");
 
-exports.renderWarranty = (req, res) => {
-  res.render("warranty");
+exports.renderWarranty = async (req, res) => {
+  const products = await getProducts();
+  res.render("warranty", { products: products });
 };
 
 exports.handleSubmit = (req, res) => {
   console.log(req.body);
-  var warrId = req.body.warrid;
-  var warrName = req.body.warrname;
-  var resolution = Number(req.body.resolution);
-  var resolve;
-  var duration = Number(req.body.duration);
-  if (resolution == 1) {
-    resolve = "Repair";
-  } else if (resolution == 2) {
-    resolve = "Replace";
-  } else {
-    resolve = "Refund";
-  }
-
-
-  var type = Number(req.body.type);
-  var restype;
-  if (type == 1) {
-    restype = "Onsite";
-  } else {
-    restype = "Offsite";
-  }
-  var gridCheck = req.body.gridCheck1;
-  var extend;
-  if (gridCheck == "on") extend = true;
-  else extend = false;
+  const name = req.body.warrname;
+  const productIds = req.body.products;
+  const resolution = req.body.resolution;
+  const duration = Number(req.body.duration);
+  const type = req.body.type;
+  const gridCheck = req.body.gridCheck1;
+  const extend = gridCheck == "on" ? true : false;
   var extendDur, extendPrice;
   if (extend) {
     extendDur = Number(req.body.extenddur);
     extendPrice = Number(req.body.extendprice);
   }
-  const warr = new Warranty({
-    warrId,
-    warrName,
-    prodId: "prod1",
-    resolution: resolve,
-    type: restype,
-    extendable: extend,
-    duration,
-    extendDur,
-    extendPrice,
-  });
-  warr.save(function (err) {
-    if (!err) {
-      res.redirect("/");
-    } else {
-      console.log(err);
-    }
-  });
+
+  if (checkForLength([name, resolution, duration])) {
+    const warr = new Warranty({
+      name,
+      productIds,
+      resolution,
+      type,
+      extendable: extend,
+      duration,
+      extendDur,
+      extendPrice,
+    });
+    warr.save(function (err) {
+      if (!err) {
+        res.redirect("/");
+      } else {
+        console.log(err);
+      }
+    });
+  } else {
+    res.render("warranty", { error: "Please fill in required fields" });
+  }
 };
 
 exports.displayWarranty = async (req, res) => {

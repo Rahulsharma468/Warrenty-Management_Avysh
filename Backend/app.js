@@ -25,6 +25,7 @@ mongoose
   });
 
 app.set("view engine", "handlebars");
+app.use(express.static("images"));
 
 app.use("/", warrantyRouter);
 app.use("/product", productrouter);
