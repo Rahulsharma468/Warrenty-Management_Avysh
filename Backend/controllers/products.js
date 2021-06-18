@@ -12,10 +12,11 @@ const handleProductsubmit = (req, res) => {
   const category = req.body.category;
   const quantity = req.body.quantity;
   const description = req.body.description;
-
+  const image = req.file.filename;
   if (checkForLength([name, price, quantity, category, description])) {
     console.log("Ready");
     const newProduct = new Product({
+      image,
       name,
       price,
       quantity,

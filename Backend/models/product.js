@@ -3,7 +3,10 @@ let Schema = mongoose.Schema;
 
 let productSchema = new Schema(
   {
-    //   image: String,
+    image: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,

@@ -6,6 +6,7 @@
             <th>Category</th>
             <th>Quantity</th>
             <th>Description</th>
+            <th>Image</th>
         </tr>
     </thead>
        
@@ -17,6 +18,8 @@
                 <td> {{category}} </td>
                 <td> {{quantity}} </td>
                 <td> {{description}} </td>
+                <td> <img src="/uploads/{{image}}" class="card-img" alt="..."></td>
+                {{!-- <td>{{image}}</td> --}}
             </tr>
             {{else}}
                 <h1 style="text-align: center; color: black">No Products</h1>

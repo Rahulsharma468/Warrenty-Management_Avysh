@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { upload } = require("../controllers/helper");
 
 const {
   renderProduct,
@@ -10,7 +11,7 @@ const {
 
 router.get("/", renderProduct);
 
-router.post("/", handleProductsubmit);
+router.post("/", upload, handleProductsubmit);
 
 router.get("/display", displayProduct);
 
