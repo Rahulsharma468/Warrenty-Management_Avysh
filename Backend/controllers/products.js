@@ -6,7 +6,8 @@ const renderProduct = (req, res) => {
 };
 
 const handleProductsubmit = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
+  console.log(req.file);
   const name = req.body.name;
   const price = req.body.price;
   const category = req.body.category;
