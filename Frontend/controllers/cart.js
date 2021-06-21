@@ -3,17 +3,21 @@ var Cart = require("../models/cart");
 
 const addItem = async (req, res) => {
   let id = req.params.id;
+  let qty = req.params.qty;
   let cart = new Cart(req.session.cart ? req.session.cart : {});
   const result = await getProduct(id);
-  cart.add(result, id);
-  console.log(typeof result);
-  req.session.cart = cart;
-  console.log(cart);
-  res.send("<h1>Done</h1>");
+  if (Number(qty) <= result.quantity) {
+    cart.add(result, id, qty);
+    req.session.cart = cart;
+    console.log(cart);
+    res.send("<h1>Done</h1>");
+  } else {
+    res.send("<h1>Quantity Exceeded</h1>");
+  }
 };
 
 const getCart = (req, res) => {
-  if (!req.session.cart) {
+  if (!req.session.cart || req.session.cart.totalItems == 0) {
     console.log("No cart");
     res.json({ msg: "Cart empty" });
   } else {
@@ -25,12 +29,16 @@ const getCart = (req, res) => {
 
 const removeItem = (req, res) => {
   var id = req.params.id;
+  var qty = req.params.qty;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
-
-  cart.remove(id);
-  req.session.cart = cart;
-  console.log("removed");
-  res.send("<h1>Done</h1>");
+  if (cart.totalItems === 0 || cart === {}) {
+    res.send("<h1>Cart Empty</h1>");
+  } else {
+    cart.remove(id, qty);
+    req.session.cart = cart;
+    console.log(cart);
+    res.send("<h1>Done</h1>");
+  }
 };
 
 module.exports = {
