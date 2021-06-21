@@ -1,0 +1,51 @@
+<br>
+<section id="display-cart">
+{{#if item.length}}
+  <table class="table table-striped mt-5">
+    <thead class="thead-dark">
+      <tr>
+        <th>Image</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each item}}
+        <tr>
+          <td>Image</td>
+          <td>{{item.name}}</td>
+          <td>{{quantity}}</td>
+          <td>{{price}}</td>
+          <td>
+            <a
+              href="/cart/remove/{{item._id}}&1"
+              style="text-decoration: none; color:inherit;"
+            ><i class="bi bi-dash"></i></a>
+          </td>
+          <td>
+            <a
+              href="/cart/remove/{{item._id}}&{{quantity}}"
+              style="text-decoration: none; color:inherit;"
+            >
+              <i class="bi bi-trash"></i>
+            </a>
+          </td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>{{quantity}}</td>
+        <td><b>{{total}}</b></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  {{else}}
+  <h1 style="text-align: center; color: black">No items in cart</h1>
+  {{/if}}
+</section>

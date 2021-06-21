@@ -10,7 +10,7 @@ const addItem = async (req, res) => {
     cart.add(result, id, qty);
     req.session.cart = cart;
     console.log(cart);
-    res.send("<h1>Done</h1>");
+    res.render("disp_cart",{item:cart.getItems(),total:cart.totalPrice,quantity:cart.totalItems});
   } else {
     res.send("<h1>Quantity Exceeded</h1>");
   }
@@ -19,11 +19,11 @@ const addItem = async (req, res) => {
 const getCart = (req, res) => {
   if (!req.session.cart || req.session.cart.totalItems == 0) {
     console.log("No cart");
-    res.json({ msg: "Cart empty" });
+    res.render("disp_cart",{item:{}});
   } else {
     var cart = new Cart(req.session.cart);
     console.log(cart.getItems());
-    res.json(cart.getItems());
+    res.render("disp_cart",{item:cart.getItems(),total:cart.totalPrice,quantity:cart.totalItems});
   }
 };
 
@@ -32,12 +32,12 @@ const removeItem = (req, res) => {
   var qty = req.params.qty;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   if (cart.totalItems === 0 || cart === {}) {
-    res.send("<h1>Cart Empty</h1>");
+    res.render("disp_cart",{item:{}});
   } else {
     cart.remove(id, qty);
     req.session.cart = cart;
     console.log(cart);
-    res.send("<h1>Done</h1>");
+    res.render("disp_cart",{item:cart.getItems(),total:cart.totalPrice,quantity:cart.totalItems});
   }
 };
 
