@@ -96,15 +96,35 @@
             </div>
           </div>
         </div>
-        <div class="form-floating mb-3">
-          <input
-            type="number"
-            class="form-control"
-            id="duration",
-            name = "duration"
-            placeholder="Warranty Name"
-          />
-          <label for="duration">Duration *</label>
+        
+        <div class="form-floating mb-3 p-2">
+          <span class="">Duration</span>
+          <div class="form-row" id="duration">
+            <div class="col-2">
+              <div class="form-floating">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="duration-year"
+                  name="durationYear"
+                  value="0"
+                />
+                <label for="duration-year">Year</label>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-floating">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="duration-month"
+                  name="durationMonth"
+                  value="0"
+                />
+                <label for="duration-month">Month</label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-10">
@@ -123,15 +143,34 @@
           </div>
         </div>
         <div id="extend" style="display: none">
-          <div class="form-floating mb-3">
-            <input
-              type="number"
-              class="form-control"
-              id="extenddur"
-              name="extenddur"
-              placeholder="Warranty Name"
-            />
-            <label for="extenddur">Extension Duration</label>
+          <div class="form-floating mb-3 p-2">
+            <span class="">Extension Duration *</span>
+            <div class="form-row" id="duration">
+              <div class="col-2">
+                <div class="form-floating">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="extension-duration-year"
+                    name="extensionDurationYear"
+                    value="0"
+                  />
+                  <label for="extension-duration-year">Year</label>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-floating">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="extension-duration-month"
+                    name="extensionDurationMonth"
+                    value="0"
+                  />
+                  <label for="extension-duration-month">Month</label>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="form-floating mb-3">
             <input

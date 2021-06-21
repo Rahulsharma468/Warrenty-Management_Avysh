@@ -12,6 +12,7 @@ const warrSchema = new Schema(
     productIds: [
       {
         type: ObjectId,
+        ref: "Product",
       },
     ],
     resolution: {
@@ -26,11 +27,24 @@ const warrSchema = new Schema(
       type: Boolean,
     },
     duration: {
-      type: Number,
-      required: true,
+      year: {
+        type: Number,
+        required: true,
+      },
+      month: {
+        type: Number,
+        required: true,
+      },
     },
     extendDur: {
-      type: Number,
+      year: {
+        type: Number,
+        required: true,
+      },
+      month: {
+        type: Number,
+        required: true,
+      },
     },
     extendPrice: {
       type: Number,

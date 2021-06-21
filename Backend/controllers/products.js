@@ -28,7 +28,7 @@ const handleProductsubmit = (req, res) => {
       .save()
       .then(() => {
         console.log("Saved");
-        res.redirect("/");
+        res.redirect("/product/display");
       })
       .catch((err) => {
         console.log("Error", err.message);
@@ -53,9 +53,26 @@ const get_all_products = async (req, res) => {
   res.json(products);
 };
 
+const get_product = async (req, res) => {
+  let id = req.params.prodId;
+  Product.findOne({ _id: id })
+    .lean()
+    .then((result) => {
+      console.log(result);
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({
+        err,
+      });
+    });
+};
+
 module.exports = {
   renderProduct,
   handleProductsubmit,
   displayProduct,
   get_all_products,
+  get_product,
 };

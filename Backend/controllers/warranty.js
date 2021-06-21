@@ -11,17 +11,21 @@ exports.handleSubmit = (req, res) => {
   const name = req.body.warrname;
   const productIds = req.body.products;
   const resolution = req.body.resolution;
-  const duration = Number(req.body.duration);
+  const duration_year = req.body.durationYear;
+  const duration_month = req.body.durationMonth;
+  const duration = { year: duration_year, month: duration_month };
   const type = req.body.type;
   const gridCheck = req.body.gridCheck1;
   const extend = gridCheck == "on" ? true : false;
   var extendDur, extendPrice;
   if (extend) {
-    extendDur = Number(req.body.extenddur);
+    const extend_duration_year = req.body.extensionDurationYear;
+    const extend_duration_month = req.body.extensionDurationMonth;
+    extendDur = { year: extend_duration_year, month: extend_duration_month };
     extendPrice = Number(req.body.extendprice);
   }
 
-  if (checkForLength([name, resolution, duration])) {
+  if (checkForLength([name, resolution])) {
     const warr = new Warranty({
       name,
       productIds,
@@ -34,7 +38,7 @@ exports.handleSubmit = (req, res) => {
     });
     warr.save(function (err) {
       if (!err) {
-        res.redirect("/");
+        res.redirect("/display");
       } else {
         console.log(err);
       }
@@ -46,7 +50,7 @@ exports.handleSubmit = (req, res) => {
 
 exports.displayWarranty = async (req, res) => {
   try {
-    const warr = await Warranty.find({}).lean();
+    const warr = await Warranty.find({}).populate("productIds").lean().exec();
     console.log(warr);
     res.render("display", { warr: warr });
   } catch (error) {

@@ -20,25 +20,25 @@
                 <td>
                     <div class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="productsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Product Ids
+                            Products
                         </a>
                         <div class="dropdown-menu" aria-labelledby="productsDropdown">
                             {{#each productIds}}
-                                <a class="dropdown-item" href="/product/display">{{this}}</a>
+                                <a class="dropdown-item" href="/product/display">{{name}}</a>
                             {{else}}
                                 <h6>No products</h6>
                             {{/each}}
                         </div>
                     </div>
                 </td>
-                <td>{{duration}}</td>
+                <td>{{duration.year}} years, {{duration.month}} months</td>
                 <td>{{resolution}}</td>
                 <td>{{type}}</td>
-                <td>{{extendDur}}</td>
+                <td>{{extendDur.year}} years, {{extendDur.month}} months</td>
                 <td>{{extendPrice}}</td>
             </tr>
             {{else}}
-            <h1 style="text-align: center; color: black">No Products</h1>
+            <h1 style="text-align: center; color: black">No Warranties registered</h1>
             {{/each}}
         </tbody>
     </table>
