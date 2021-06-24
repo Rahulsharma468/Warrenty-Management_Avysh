@@ -7,6 +7,7 @@
             <th>Quantity</th>
             <th>Description</th>
             <th>Image</th>
+            <th></th>
         </tr>
     </thead>
        
@@ -19,6 +20,13 @@
                 <td> {{quantity}} </td>
                 <td> {{description}} </td>
                 <td> <img src="/uploads/{{image}}" width="100px" height="100px" alt="..."></td>
+                <td> <div class="mx-3 pb-3">
+                        <form action="/product/{{_id}}?_method=DELETE" method="POST">
+                            <a href="/product/{{_id}}/edit" class="btn btn-primary mr-1">Edit</a>
+                            <button class="btn btn-outline-danger">Remove</button>
+                        </form>
+                    </div>
+                </td>
             </tr>
             {{else}}
                 <h1 style="text-align: center; color: black">No Products registered</h1>

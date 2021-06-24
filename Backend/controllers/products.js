@@ -69,10 +69,56 @@ const get_product = async (req, res) => {
     });
 };
 
+const editProducts = async (req, res) => {
+  let id = req.params.id;
+  Product.findOne({ _id: id })
+    .lean()
+    .then((result) => {
+      res.render("editProducts", { result: result });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({
+        err,
+      });
+    });
+};
+
+const updateProduct = (req, res) => {
+  var product = {
+    name: req.sanitize(req.body.name),
+    price: req.sanitize(req.body.price),
+    category: req.sanitize(req.body.category),
+    quantity: req.sanitize(req.body.quantity),
+    description: req.sanitize(req.body.description),
+  };
+
+  Product.findByIdAndUpdate(req.params.id, product, function (err, food) {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect("/product/display");
+  });
+
+  console.log(req.body);
+};
+
+const deleteProduct = (req, res) => {
+  Product.findByIdAndRemove(req.params.id, function (err, food) {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect("/product/display");
+  });
+};
+
 module.exports = {
   renderProduct,
   handleProductsubmit,
   displayProduct,
   get_all_products,
   get_product,
+  editProducts,
+  updateProduct,
+  deleteProduct,
 };
