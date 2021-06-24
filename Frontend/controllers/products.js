@@ -3,7 +3,8 @@ const { getProduct, getProducts } = require("../apicalls/products");
 const get_all_products = async (req, res) => {
   const data = await getProducts();
   console.log(data);
-  return res.json(data);
+  // return res.json(data);
+  res.render("prodList", { products: data });
 };
 
 const get_one = async (req, res) => {

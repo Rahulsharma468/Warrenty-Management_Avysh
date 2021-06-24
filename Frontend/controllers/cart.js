@@ -17,7 +17,10 @@ const addItem = async (req, res) => {
 };
 
 const getCart = (req, res) => {
-  if (!req.session.cart || req.session.cart.totalItems == 0) {
+  if(!req.user){
+    res.render("pages/login");
+  }
+  else if (!req.session.cart || req.session.cart.totalItems == 0) {
     console.log("No cart");
     res.render("disp_cart",{item:{}});
   } else {

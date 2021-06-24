@@ -1,7 +1,7 @@
 // const { ensureAuthenticated } = require("../config/auth");
 
 const mainPage = (req, res) => {
-  res.render("pages/splash");
+  res.render("entry");
 };
 
 const renderDash = (req, res) => {
