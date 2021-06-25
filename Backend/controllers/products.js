@@ -93,14 +93,30 @@ const updateProduct = (req, res) => {
     description: req.sanitize(req.body.description),
   };
 
-  Product.findByIdAndUpdate(req.params.id, product, function (err, food) {
+  if (req.file) {
+    product.image = req.file.filename;
+  }
+
+  console.log(req.body);
+  if (
+    !checkForLength([
+      product.name,
+      product.price,
+      product.category,
+      product.quantity,
+      product.description,
+    ])
+  ) {
+    res.redirect(`/product/${req.params.id}/edit`);
+    return;
+  }
+
+  Product.findByIdAndUpdate(req.params.id, product, function (err, prod) {
     if (err) {
       console.log(err);
     }
     res.redirect("/product/display");
   });
-
-  console.log(req.body);
 };
 
 const deleteProduct = (req, res) => {

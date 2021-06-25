@@ -23,7 +23,7 @@ router.get("/all", get_all_products);
 
 router.get("/:id/edit", editProducts);
 
-router.put("/:id/update", updateProduct);
+router.post("/:id/update", upload, updateProduct);
 
 router.delete("/:id", deleteProduct);
 
