@@ -85,14 +85,38 @@ const editProducts = async (req, res) => {
 };
 
 const updateProduct = (req, res) => {
-  Product.updateOne(req.params.id, req.body, function (err, food) {
+  var product = {
+    name: req.sanitize(req.body.name),
+    price: req.sanitize(req.body.price),
+    category: req.sanitize(req.body.category),
+    quantity: req.sanitize(req.body.quantity),
+    description: req.sanitize(req.body.description),
+  };
+
+  if (req.file) {
+    product.image = req.file.filename;
+  }
+
+  console.log(req.body);
+  if (
+    !checkForLength([
+      product.name,
+      product.price,
+      product.category,
+      product.quantity,
+      product.description,
+    ])
+  ) {
+    res.redirect(`/product/${req.params.id}/edit`);
+    return;
+  }
+
+  Product.findByIdAndUpdate(req.params.id, product, function (err, prod) {
     if (err) {
       console.log(err);
     }
     res.redirect("/product/display");
   });
-
-  console.log(req.body);
 };
 
 const deleteProduct = (req, res) => {

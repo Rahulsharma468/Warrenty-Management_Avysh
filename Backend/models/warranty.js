@@ -40,10 +40,12 @@ const warrSchema = new Schema(
       year: {
         type: Number,
         required: true,
+        default: 0,
       },
       month: {
         type: Number,
         required: true,
+        default: 0,
       },
     },
     extendPrice: {

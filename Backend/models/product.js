@@ -1,5 +1,6 @@
-let mongoose = require("mongoose");
-let Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const { ObjectId } = Schema;
 
 let productSchema = new Schema(
   {
@@ -29,6 +30,14 @@ let productSchema = new Schema(
     description: {
       type: String,
       required: true,
+    },
+    warrantyId: {
+      type: ObjectId,
+      ref: "Warranty",
+    },
+    noWarranty: {
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }

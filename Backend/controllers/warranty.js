@@ -1,3 +1,5 @@
+const product = require("../models/product");
+const Product = require("../models/product");
 const Warranty = require("../models/warranty");
 const { checkForLength, getProducts } = require("./helper");
 
@@ -11,8 +13,8 @@ exports.handleSubmit = (req, res) => {
   const name = req.body.warrname;
   const productIds = req.body.products;
   const resolution = req.body.resolution;
-  const duration_year = req.body.durationYear;
-  const duration_month = req.body.durationMonth;
+  const duration_year = Number(req.body.durationYear);
+  const duration_month = Number(req.body.durationMonth);
   const duration = { year: duration_year, month: duration_month };
   const type = req.body.type;
   const gridCheck = req.body.gridCheck1;
@@ -25,7 +27,10 @@ exports.handleSubmit = (req, res) => {
     extendPrice = Number(req.body.extendprice);
   }
 
-  if (checkForLength([name, resolution])) {
+  if (
+    checkForLength([name, resolution, type]) &&
+    (duration_year || duration_month)
+  ) {
     const warr = new Warranty({
       name,
       productIds,
@@ -36,15 +41,24 @@ exports.handleSubmit = (req, res) => {
       extendDur,
       extendPrice,
     });
-    warr.save(function (err) {
+    warr.save(async function (err) {
       if (!err) {
+        if (productIds) {
+          await productIds.forEach(async (id) => {
+            await Product.findByIdAndUpdate(id, {
+              warrantyId: warr._id,
+              noWarranty: false,
+            });
+          });
+        }
+
         res.redirect("/display");
       } else {
         console.log(err);
       }
     });
   } else {
-    res.render("warranty", { error: "Please fill in required fields" });
+    res.redirect("/");
   }
 };
 
