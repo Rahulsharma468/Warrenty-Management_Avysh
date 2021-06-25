@@ -85,15 +85,7 @@ const editProducts = async (req, res) => {
 };
 
 const updateProduct = (req, res) => {
-  var product = {
-    name: req.sanitize(req.body.name),
-    price: req.sanitize(req.body.price),
-    category: req.sanitize(req.body.category),
-    quantity: req.sanitize(req.body.quantity),
-    description: req.sanitize(req.body.description),
-  };
-
-  Product.findByIdAndUpdate(req.params.id, product, function (err, food) {
+  Product.updateOne(req.params.id, req.body, function (err, food) {
     if (err) {
       console.log(err);
     }
