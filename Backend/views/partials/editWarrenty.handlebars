@@ -1,0 +1,210 @@
+<section id="warranty">
+      <h1 style="text-align: center; color: black">Warranty</h1>
+      <h6 class="text-danger">{{error}}</h6>
+      <form style="margin: 5%" action="/" method="post">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="warrname"
+            name="warrname"
+            placeholder="Warranty Name"
+            required
+          />
+          <label for="warrname">Warranty Name *</label>
+        </div>
+
+        <select class="form-control mb-3" name="resolution" required>
+          <option selected disabled>Resolution *</option>
+          <option value="Repair" required>Repair</option>
+          <option value="Replace" required>Replace</option>
+          <option value="Refund" required>Refund</option>
+        </select>
+        
+        <select class="form-control mb-3" name="type" required>
+          <option selected disabled>Type *</option>
+          <option value="Onsite">Onsite</option>
+          <option value="Offsite">Offsite</option>
+        </select>
+        <button
+          type="button"
+          class="btn btn-outline-dark mb-3"
+          data-toggle="modal"
+          data-target="#exampleModalScrollable"
+        >
+          Choose Products
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModalScrollable"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalScrollableTitle"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                  Products
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h4 class="text-secondary">Select products</h4>
+                <div>
+                  {{#each products}}
+                      {{#if noWarranty}}
+                        <div class="media border">
+                          <input type='checkbox' value={{_id}} name="products"/>
+                          <div>
+                            <img class="mr-3" src="/uploads/{{image}}" alt="Product image" width="200px" height="200px">
+                          </div>
+                          <div class="media-body">
+                            <div>
+                              <ul class="list-unstyled">
+                                <li> <span class="font-weight-bold">Name</span>: {{name}} </li>
+                                <li> <span class="font-weight-bold">Price</span>: {{price}} </li>
+                                <li> <span class="font-weight-bold">Category</span>: {{category}} </li>
+                                <li> <span class="font-weight-bold">Quantity</span>: {{quantity}} </li>
+                                <li> <span class="font-weight-bold">Description</span>: {{description}} </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      {{/if}}
+                    {{else}}
+                      <h1 style="text-align: center; color: black">No Products</h1>
+                  {{/each}}
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-floating mb-3 p-2">
+          <span class="">Duration</span>
+          <div class="form-row" id="duration">
+            <div class="col-2">
+              <div class="form-floating">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="duration-year"
+                  name="durationYear"
+                  value="0"
+                  required
+                />
+                <label for="duration-year">Year</label>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-floating">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="duration-month"
+                  name="durationMonth"
+                  value="0"
+                  required
+                />
+                <label for="duration-month">Month</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input
+                class="form-check-input mb-3"
+                type="checkbox"
+                id="gridCheck1"
+                name="gridCheck1"
+                onclick="myfun()"
+              />
+              <label class="form-check-label" for="gridCheck1">
+                Extendable
+              </label>
+            </div>
+          </div>
+        </div>
+        <div id="extend" style="display: none">
+          <div class="form-floating mb-3 p-2">
+            <span class="">Extension Duration *</span>
+            <div class="form-row" id="duration">
+              <div class="col-2">
+                <div class="form-floating">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="extension-duration-year"
+                    name="extensionDurationYear"
+                    value="0"
+                  />
+                  <label for="extension-duration-year">Year</label>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-floating">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="extension-duration-month"
+                    name="extensionDurationMonth"
+                    value="0"
+                  />
+                  <label for="extension-duration-month">Month</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="number"
+              class="form-control"
+              id="extendprice"
+              name="extendprice"
+              placeholder="Warranty Name"
+            />
+            <label for="extendprice">Extension Price</label>
+          </div>
+        </div>
+        <script>
+          function myfun() {
+            var box = document.getElementById("gridCheck1");
+            var div = document.getElementById("extend");
+            if (box.checked == true) {
+              div.style.display = "block";
+            } else {
+              div.style.display = "none";
+            }
+          }
+        </script>
+        <button
+          type="submit"
+          class="btn btn-outline-primary btn-lg text-center"
+          style="display: block; margin: 0 auto"
+        >
+          Submit
+        </button>
+      </form>
+    </section>

@@ -1,8 +1,5 @@
 const Product = require("../models/product");
 const multer = require("multer");
-const dir = "../uploads";
-const fs = require("fs");
-const path = require("path");
 
 const checkForLength = (arr) => {
   for (var e of arr) if (!e) return false;
