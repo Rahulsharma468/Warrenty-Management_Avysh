@@ -5,8 +5,10 @@ const { ObjectId } = Schema;
 let productSchema = new Schema(
   {
     image: {
-      type: String,
-      required: true,
+      data: {
+        type: String,
+        required: true,
+      },
     },
     name: {
       type: String,

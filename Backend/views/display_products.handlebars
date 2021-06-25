@@ -19,7 +19,9 @@
                 <td> {{category}} </td>
                 <td> {{quantity}} </td>
                 <td> {{description}} </td>
-                <td> <img src="/uploads/{{image}}" width="100px" height="100px" alt="..."></td>
+                {{#with image}}
+                    <td> <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></td>
+                {{/with}}
                 <td> <div class="mx-3 pb-3">
                         <form action="/product/{{_id}}?_method=DELETE" method="POST">
                             <a href="/product/{{_id}}/edit" class="btn btn-primary mr-1">Edit</a>

@@ -1,29 +1,35 @@
 const Product = require("../models/product");
+const fs = require("fs");
 const { getProducts, checkForLength } = require("./helper");
+const path = require("path");
 
 const renderProduct = (req, res) => {
   res.render("products");
 };
 
 const handleProductsubmit = (req, res) => {
-  // console.log(req.body);
-  console.log(req.file);
   const name = req.body.name;
   const price = req.body.price;
   const category = req.body.category;
   const quantity = req.body.quantity;
   const description = req.body.description;
   const image = req.file.filename;
-  if (checkForLength([name, price, quantity, category, description])) {
+
+  if (checkForLength([name, price, quantity, category, description, image])) {
     console.log("Ready");
+
     const newProduct = new Product({
-      image,
       name,
       price,
       quantity,
       category,
       description,
     });
+
+    var data = fs.readFileSync("public/uploads/" + image);
+    newProduct.image.data = data.toString("base64");
+    fs.unlinkSync("public/uploads/" + image);
+
     newProduct
       .save()
       .then(() => {
@@ -41,7 +47,6 @@ const handleProductsubmit = (req, res) => {
 const displayProduct = async (req, res) => {
   try {
     const products = await Product.find({}).lean();
-    console.log(products);
     res.render("display_products", { products: products });
   } catch (error) {
     console.log(error);
@@ -94,10 +99,12 @@ const updateProduct = (req, res) => {
   };
 
   if (req.file) {
-    product.image = req.file.filename;
+    product.image = {};
+    var data = fs.readFileSync("public/uploads/" + req.file.filename);
+    product.image.data = data.toString("base64");
+    fs.unlinkSync("public/uploads/" + req.file.filename);
   }
 
-  console.log(req.body);
   if (
     !checkForLength([
       product.name,
