@@ -71,3 +71,43 @@ exports.displayWarranty = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.editWarrenty = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const products = await getProducts();
+    await Warranty.findById({ _id: id })
+      .lean()
+      .then((result) => {
+        res.render("editWarrenty", { result: result, products: products });
+      })
+      .catch((err) => {
+        console.log("Err", err.message);
+      });
+  } catch (err) {
+    console.log("Error in Try", errmessage);
+  }
+};
+
+exports.updateWarrenty = async (req, res) => {
+  const id = req.params.id;
+  const productIds = req.body.products;
+  const warrenty = {
+    productIds: productIds,
+  };
+  await Warranty.findByIdAndUpdate({ _id: id }, warrenty, async (err) => {
+    if (!err) {
+      if (productIds) {
+        await productIds.forEach(async (id) => {
+          await Product.findByIdAndUpdate(id, {
+            warrantyId: warrenty._id,
+            noWarranty: false,
+          });
+        });
+      }
+      res.redirect("/display");
+    } else {
+      console.log("Error in update");
+    }
+  });
+};

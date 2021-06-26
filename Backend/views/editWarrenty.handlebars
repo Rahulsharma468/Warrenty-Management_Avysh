@@ -1,63 +1,43 @@
 <section id="warranty">
       <h1 style="text-align: center; color: black">Warranty</h1>
       <h6 class="text-danger">{{error}}</h6>
-      <form style="margin: 5%" action="/" method="post">
-        <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="warrname"
-            name="warrname"
-            placeholder="Warranty Name"
-            required
-          />
+      <form style="margin: 5%" action="/{{result._id}}/update" method="post">
+        <div class="form mb-3">
           <label for="warrname">Warranty Name *</label>
+          <input type="text" class="form-control" id="warrname" name="warrname" value="{{result.name}}" disabled />
         </div>
 
-        <select class="form-control mb-3" name="resolution" required>
-          <option selected disabled>Resolution *</option>
-          <option value="Repair" required>Repair</option>
-          <option value="Replace" required>Replace</option>
-          <option value="Refund" required>Refund</option>
+        <label for="resolution">Resolution *</label>
+        <select class="form-control mb-3" name="resolution" disabled>
+          <option selected disabled>{{result.resolution}}</option>
         </select>
         
-        <select class="form-control mb-3" name="type" required>
-          <option selected disabled>Type *</option>
-          <option value="Onsite">Onsite</option>
-          <option value="Offsite">Offsite</option>
+        <label for="type">Type *</label>
+        <select class="form-control mb-3" name="type" disabled>
+          <option selected disabled>{{result.type}}</}option>
         </select>
+
+
         <button
-          type="button"
-          class="btn btn-outline-dark mb-3"
-          data-toggle="modal"
-          data-target="#exampleModalScrollable"
-        >
+          type="button" class="btn btn-outline-dark mb-3" data-toggle="modal" data-target="#exampleModalScrollable">
           Choose Products
         </button>
 
         <!-- Modal -->
-        <div
-          class="modal fade"
-          id="exampleModalScrollable"
-          tabindex="-1"
-          role="dialog"
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1"  role="dialog" 
           aria-labelledby="exampleModalScrollableTitle"
-          aria-hidden="true"
-        >
+          aria-hidden="true"  >
+
           <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalScrollableTitle">
                   Products
                 </h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                   <span aria-hidden="true">&times;</span>
                 </button>
+
               </div>
               <div class="modal-body">
                 <h4 class="text-secondary">Select products</h4>
@@ -67,7 +47,10 @@
                         <div class="media border">
                           <input type='checkbox' value={{_id}} name="products"/>
                           <div>
-                            <img class="mr-3" src="/uploads/{{image}}" alt="Product image" width="200px" height="200px">
+                            {{#with image}}
+                              <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></>
+                            {{/with}}
+                            {{!-- <img class="mr-3" src="/uploads/{{image}}" alt="Product image" width="200px" height="200px"> --}}
                           </div>
                           <div class="media-body">
                             <div>
@@ -88,11 +71,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-dismiss="modal"
-                >
+                <button type="button"  class="btn btn-primary" data-dismiss="modal" >
                   Done
                 </button>
               </div>
@@ -107,6 +86,7 @@
               <div class="form-floating">
                 <input
                   type="number"
+                  disabled
                   class="form-control"
                   id="duration-year"
                   name="durationYear"
@@ -120,6 +100,7 @@
               <div class="form-floating">
                 <input
                   type="number"
+                  disabled
                   class="form-control"
                   id="duration-month"
                   name="durationMonth"
@@ -140,6 +121,7 @@
                 id="gridCheck1"
                 name="gridCheck1"
                 onclick="myfun()"
+                disabled
               />
               <label class="form-check-label" for="gridCheck1">
                 Extendable
@@ -168,6 +150,7 @@
                   <input
                     type="number"
                     class="form-control"
+                    disabled
                     id="extension-duration-month"
                     name="extensionDurationMonth"
                     value="0"
@@ -182,6 +165,7 @@
               type="number"
               class="form-control"
               id="extendprice"
+              disabled
               name="extendprice"
               placeholder="Warranty Name"
             />
@@ -204,7 +188,7 @@
           class="btn btn-outline-primary btn-lg text-center"
           style="display: block; margin: 0 auto"
         >
-          Submit
+          Update
         </button>
       </form>
     </section>

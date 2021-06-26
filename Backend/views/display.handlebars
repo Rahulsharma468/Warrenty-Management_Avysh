@@ -10,6 +10,7 @@
             <th>Type</th>
             <th>Extendable Duration</th>
             <th>Extension Price</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                 <td>{{type}}</td>
                 <td>{{extendDur.year}} years, {{extendDur.month}} months</td>
                 <td>{{extendPrice}}</td>
+                <td><a href="/{{_id}}/edit" class="btn btn-primary mr-1">Edit</a></td>
             </tr>
             {{else}}
             <h1 style="text-align: center; color: black">No Warranties registered</h1>
