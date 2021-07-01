@@ -49,9 +49,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// app.get("/", (req, res) => {
-//   res.render("desc");
-// });
 app.use("/", indexRouter);
 
 app.use("/item", prodRouter);

@@ -7,6 +7,8 @@ const {
   displayWarranty,
   editWarrenty,
   updateWarrenty,
+  getOneWarranty,
+  getAllWarranty,
 } = require("../controllers/warranty");
 
 router.get("/", renderWarranty);
@@ -19,4 +21,7 @@ router.get("/:id/edit", editWarrenty);
 
 router.post("/:id/update", updateWarrenty);
 
+router.get("/single/:id", getOneWarranty);
+
+router.get("/all", getAllWarranty);
 module.exports = router;

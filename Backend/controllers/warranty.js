@@ -111,3 +111,30 @@ exports.updateWarrenty = async (req, res) => {
     }
   });
 };
+
+exports.getOneWarranty = async (req, res) => {
+  const id = req.params.id;
+  Warranty.findOne({ _id: id })
+    .lean()
+    .then((result) => {
+      console.log(result);
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ err });
+    });
+};
+
+exports.getAllWarranty = async (req, res) => {
+  return Warranty.find()
+    .lean()
+    .then((result) => {
+      console.log(result);
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ err });
+    });
+};

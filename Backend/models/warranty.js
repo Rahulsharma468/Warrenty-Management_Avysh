@@ -17,7 +17,7 @@ const warrSchema = new Schema(
     ],
     resolution: {
       type: String,
-      requires: true,
+      required: true,
     },
     type: {
       type: String,
