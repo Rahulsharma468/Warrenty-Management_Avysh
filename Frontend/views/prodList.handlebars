@@ -46,7 +46,9 @@
 
 <div class='container-fluid'>
   {{#each products}}
-    <div class="card mx-auto col-md-3 col-10 mt-5"> <img class='mx-auto img-thumbnail' src="https://i.imgur.com/pjITBzX.jpg" width="auto" height="auto" />
+    <div class="card mx-auto col-md-3 col-10 mt-5"> {{#with image}}
+                    <td> <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></td>
+                {{/with}}
         <div class="card-body text-center mx-auto">
             <div class='cvp'>
                 <h5 class="card-title font-weight-bold">{{this.name}}</h5>

@@ -20,10 +20,70 @@
 
         <button
           type="button" class="btn btn-outline-dark mb-3" data-toggle="modal" data-target="#exampleModalScrollable">
-          Choose Products
+          Choose New Products
+        </button>
+
+        <button
+          type="button" class="btn btn-outline-dark mb-3" data-toggle="modal" data-target="#exampleModalScrollable">
+          Edit Selected
         </button>
 
         <!-- Modal -->
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1"  role="dialog" 
+          aria-labelledby="exampleModalScrollableTitle"
+          aria-hidden="true"  >
+
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                  Products
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+              </div>
+              <div class="modal-body">
+                <h4 class="text-secondary">Select products</h4>
+                <div>
+                  {{#each products}}
+                      {{#if noWarranty}}
+                        <div class="media border">
+                          <input type='checkbox' value={{_id}} name="products"/>
+                          <div>
+                            {{#with image}}
+                              <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></>
+                            {{/with}}
+                            {{!-- <img class="mr-3" src="/uploads/{{image}}" alt="Product image" width="200px" height="200px"> --}}
+                          </div>
+                          <div class="media-body">
+                            <div>
+                              <ul class="list-unstyled">
+                                <li> <span class="font-weight-bold">Name</span>: {{name}} </li>
+                                <li> <span class="font-weight-bold">Price</span>: {{price}} </li>
+                                <li> <span class="font-weight-bold">Category</span>: {{category}} </li>
+                                <li> <span class="font-weight-bold">Quantity</span>: {{quantity}} </li>
+                                <li> <span class="font-weight-bold">Description</span>: {{description}} </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      {{/if}}
+                    {{else}}
+                      <h1 style="text-align: center; color: black">No Products</h1>
+                  {{/each}}
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button"  class="btn btn-primary" data-dismiss="modal" >
+                  Done
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="modal fade" id="exampleModalScrollable" tabindex="-1"  role="dialog" 
           aria-labelledby="exampleModalScrollableTitle"
           aria-hidden="true"  >
