@@ -67,9 +67,7 @@
                         <div class="media border">
                           <input type='checkbox' value={{_id}} name="products"/>
                           <div>
-                            {{#with image}}
-                              <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></>
-                            {{/with}}
+                            <img src="http://localhost:3000/product/image/{{image}}" id="product-img" width="200px" height="200px" alt="..."></>
                             {{!-- <img class="mr-3" src="{{image}}" alt="Product image" width="200px" height="200px"> --}}
                           </div>
                           <div class="media-body">

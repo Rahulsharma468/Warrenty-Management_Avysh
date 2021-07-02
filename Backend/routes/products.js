@@ -11,6 +11,7 @@ const {
   editProducts,
   deleteProduct,
   updateProduct,
+  getImage,
 } = require("../controllers/products");
 
 router.get("/", renderProduct);
@@ -28,5 +29,7 @@ router.post("/:id/update", upload, updateProduct);
 router.delete("/:id", deleteProduct);
 
 router.get("/:prodId", get_product);
+
+router.get("/image/:filename", getImage);
 
 module.exports = router;

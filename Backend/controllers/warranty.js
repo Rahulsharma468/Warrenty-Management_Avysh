@@ -11,7 +11,10 @@ exports.renderWarranty = async (req, res) => {
 exports.handleSubmit = (req, res) => {
   console.log(req.body);
   const name = req.body.warrname;
-  const productIds = req.body.products;
+  const productIds =
+    typeof req.body.products === "string"
+      ? [req.body.products]
+      : req.body.products;
   const resolution = req.body.resolution;
   const duration_year = Number(req.body.durationYear);
   const duration_month = Number(req.body.durationMonth);
@@ -26,7 +29,6 @@ exports.handleSubmit = (req, res) => {
     extendDur = { year: extend_duration_year, month: extend_duration_month };
     extendPrice = Number(req.body.extendprice);
   }
-
   if (
     checkForLength([name, resolution, type]) &&
     (duration_year || duration_month)
@@ -64,9 +66,13 @@ exports.handleSubmit = (req, res) => {
 
 exports.displayWarranty = async (req, res) => {
   try {
-    const warr = await Warranty.find({}).populate("productIds").lean().exec();
-    console.log(warr);
-    res.render("display", { warr: warr });
+    Warranty.find({})
+      .populate("productIds")
+      .lean()
+      .exec((err, warr) => {
+        console.log(warr);
+        res.render("display", { warr });
+      });
   } catch (error) {
     console.log(error);
   }
@@ -76,14 +82,16 @@ exports.editWarrenty = async (req, res) => {
   const id = req.params.id;
   try {
     const products = await getProducts();
-    const taken = await get_taken_products();
+    // const taken = await get_taken_products();
     await Warranty.findById({ _id: id })
+      .populate("productIds")
       .lean()
       .then((result) => {
+        const productIds = result.productIds;
         res.render("editWarrenty", {
           result: result,
           products: products,
-          taken: taken,
+          taken: productIds,
         });
       })
       .catch((err) => {
@@ -96,25 +104,48 @@ exports.editWarrenty = async (req, res) => {
 
 exports.updateWarrenty = async (req, res) => {
   const id = req.params.id;
-  const productIds = req.body.products;
-  const warrenty = {
-    productIds: productIds,
-  };
-  await Warranty.findByIdAndUpdate({ _id: id }, warrenty, async (err) => {
-    if (!err) {
+  const productIds =
+    typeof req.body.products === "string"
+      ? [req.body.products]
+      : req.body.products;
+  await Warranty.findById({ _id: id })
+    .populate("productIds")
+    .lean()
+    .then(async (result) => {
+      const productIds = result.productIds;
       if (productIds) {
         await productIds.forEach(async (id) => {
           await Product.findByIdAndUpdate(id, {
-            warrantyId: warrenty._id,
-            noWarranty: false,
+            warrantyId: null,
+            noWarranty: true,
           });
         });
       }
-      res.redirect("/display");
-    } else {
-      console.log("Error in update");
+    })
+    .catch((err) => {
+      console.log("Err", err.message);
+    });
+  await Warranty.findByIdAndUpdate(
+    { _id: id },
+    {
+      productIds: productIds,
+    },
+    async (err, warranty) => {
+      if (!err) {
+        if (productIds) {
+          await productIds.forEach(async (id) => {
+            await Product.findByIdAndUpdate(id, {
+              warrantyId: warranty._id,
+              noWarranty: false,
+            });
+          });
+        }
+        res.redirect("/display");
+      } else {
+        console.log("Error in update");
+      }
     }
-  });
+  );
 };
 
 exports.getOneWarranty = async (req, res) => {

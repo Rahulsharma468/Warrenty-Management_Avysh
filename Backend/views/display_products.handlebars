@@ -7,9 +7,9 @@
             <th>Quantity</th>
             <th>Description</th>
             <th>Image</th>
+            <th>Warranty</th>
             <th></th>
             <th></th>
-            <th>noWarranty</th>
         </tr>
     </thead>
        
@@ -21,10 +21,12 @@
                 <td> {{category}} </td>
                 <td> {{quantity}} </td>
                 <td> {{description}} </td>
-                {{#with image}}
-                    <td> <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></td>
-                {{/with}}
-
+                <td> <img src="http://localhost:3000/product/image/{{image}}" id="product-img" width="100px" height="100px" alt="..."></td>
+                {{#if noWarranty}}
+                    <td>No</td>
+                {{else}}
+                    <td>Yes</td>
+                {{/if}}
                 <td><a href="/product/{{_id}}/edit" class="btn btn-primary mr-1 mt-4">Edit</a></td>
                 <td>
                     <form action="/product/{{_id}}?_method=DELETE" method="POST">
@@ -38,7 +40,6 @@
                         </form>
                     </div>
                 </td> --}}
-                <td>{{noWarranty}}</td>
             </tr>
             {{else}}
                 <h1 style="text-align: center; color: black">No Products registered</h1>

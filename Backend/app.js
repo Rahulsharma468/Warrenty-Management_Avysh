@@ -34,8 +34,8 @@ mongoose
     console.log("Not connected ", err.message);
   });
 
-app.set("view engine", "handlebars");
 app.use(express.static("public"));
+app.set("view engine", "handlebars");
 
 app.use("/", warrantyRouter);
 app.use("/product", productrouter);

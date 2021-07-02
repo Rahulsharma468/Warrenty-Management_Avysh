@@ -20,15 +20,16 @@ const handleProductsubmit = (req, res) => {
 
     const newProduct = new Product({
       name,
+      image,
       price,
       quantity,
       category,
       description,
     });
 
-    var data = fs.readFileSync("public/uploads/" + image);
-    newProduct.image.data = data.toString("base64");
-    fs.unlinkSync("public/uploads/" + image);
+    // var data = fs.readFileSync("public/uploads/" + image);
+    // newProduct.image.data = data.toString("base64");
+    // fs.unlinkSync("public/uploads/" + image);
 
     newProduct
       .save()
@@ -96,14 +97,15 @@ const updateProduct = (req, res) => {
     category: req.sanitize(req.body.category),
     quantity: req.sanitize(req.body.quantity),
     description: req.sanitize(req.body.description),
+    image: req.sanitize(req.file.filename),
   };
 
-  if (req.file) {
-    product.image = {};
-    var data = fs.readFileSync("public/uploads/" + req.file.filename);
-    product.image.data = data.toString("base64");
-    fs.unlinkSync("public/uploads/" + req.file.filename);
-  }
+  // if (req.file) {
+  //   product.image = {};
+  //   var data = fs.readFileSync("public/uploads/" + req.file.filename);
+  //   product.image.data = data.toString("base64");
+  //   fs.unlinkSync("public/uploads/" + req.file.filename);
+  // }
 
   if (
     !checkForLength([
@@ -112,6 +114,7 @@ const updateProduct = (req, res) => {
       product.category,
       product.quantity,
       product.description,
+      product.image,
     ])
   ) {
     res.redirect(`/product/${req.params.id}/edit`);
@@ -135,6 +138,11 @@ const deleteProduct = (req, res) => {
   });
 };
 
+const getImage = (req, res) => {
+  const filename = req.params.filename;
+  res.sendFile(filename, { root: "public/uploads" });
+};
+
 module.exports = {
   renderProduct,
   handleProductsubmit,
@@ -144,4 +152,5 @@ module.exports = {
   editProducts,
   updateProduct,
   deleteProduct,
+  getImage,
 };
