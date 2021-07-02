@@ -21,7 +21,7 @@ const getProducts = () => {
 };
 
 const get_taken_products = () => {
-  return Product.find({ noWarranty: true })
+  return Product.find({ noWarranty: false })
     .limit(100)
     .lean()
     .then((result) => {
