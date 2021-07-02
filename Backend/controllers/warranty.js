@@ -1,7 +1,7 @@
 const product = require("../models/product");
 const Product = require("../models/product");
 const Warranty = require("../models/warranty");
-const { checkForLength, getProducts } = require("./helper");
+const { checkForLength, getProducts, get_taken_products } = require("./helper");
 
 exports.renderWarranty = async (req, res) => {
   const products = await getProducts();
@@ -76,16 +76,21 @@ exports.editWarrenty = async (req, res) => {
   const id = req.params.id;
   try {
     const products = await getProducts();
+    const taken = await get_taken_products();
     await Warranty.findById({ _id: id })
       .lean()
       .then((result) => {
-        res.render("editWarrenty", { result: result, products: products });
+        res.render("editWarrenty", {
+          result: result,
+          products: products,
+          taken: taken,
+        });
       })
       .catch((err) => {
         console.log("Err", err.message);
       });
   } catch (err) {
-    console.log("Error in Try", errmessage);
+    console.log("Error in Try", err.message);
   }
 };
 

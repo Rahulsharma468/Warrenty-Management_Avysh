@@ -24,7 +24,7 @@
         </button>
 
         <button
-          type="button" class="btn btn-outline-dark mb-3" data-toggle="modal" data-target="#exampleModalScrollable">
+          type="button" class="btn btn-outline-dark mb-3" data-toggle="modal" data-target="#exampleModalScrollable1">
           Edit Selected
         </button>
 
@@ -84,14 +84,16 @@
           </div>
         </div>
 
-        <div class="modal fade" id="exampleModalScrollable" tabindex="-1"  role="dialog" 
-          aria-labelledby="exampleModalScrollableTitle"
+        
+
+        <div class="modal fade" id="exampleModalScrollable1" tabindex="-1"  role="dialog" 
+          aria-labelledby="exampleModalScrollable1Title"
           aria-hidden="true"  >
 
           <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalScrollableTitle">
+                <h5 class="modal-title" id="exampleModalScrollable1Title">
                   Products
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
@@ -102,10 +104,9 @@
               <div class="modal-body">
                 <h4 class="text-secondary">Select products</h4>
                 <div>
-                  {{#each products}}
-                      {{#if noWarranty}}
+                  {{#each taken}}
                         <div class="media border">
-                          <input type='checkbox' value={{_id}} name="products"/>
+                          <input type='checkbox' value={{_id}} checked name="products"/>
                           <div>
                             {{#with image}}
                               <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></>
@@ -124,7 +125,6 @@
                             </div>
                           </div>
                         </div>
-                      {{/if}}
                     {{else}}
                       <h1 style="text-align: center; color: black">No Products</h1>
                   {{/each}}
@@ -139,6 +139,8 @@
           </div>
         </div>
         
+
+
         <div class="form-floating mb-3 p-2">
           <span class="">Duration</span>
           <div class="form-row" id="duration">

@@ -20,6 +20,19 @@ const getProducts = () => {
     });
 };
 
+const get_taken_products = () => {
+  return Product.find({ noWarranty: true })
+    .limit(100)
+    .lean()
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      console.log(err);
+      return [];
+    });
+};
+
 const storage = multer.diskStorage({
   //destination for files
   destination: function (request, file, callback) {
@@ -41,4 +54,5 @@ module.exports = {
   checkForLength,
   upload,
   getProducts,
+  get_taken_products,
 };
