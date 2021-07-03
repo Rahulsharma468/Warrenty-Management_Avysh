@@ -1,7 +1,8 @@
 const product = require("../models/product");
 const Product = require("../models/product");
 const Warranty = require("../models/warranty");
-const { checkForLength, getProducts, get_taken_products } = require("./helper");
+const { checkForLength, getProducts } = require("./helper");
+const passport = require('passport')
 
 exports.renderWarranty = async (req, res) => {
   const products = await getProducts();
@@ -174,3 +175,23 @@ exports.getAllWarranty = async (req, res) => {
       res.status(400).json({ err });
     });
 };
+
+exports.loginRoute = (req,res) => {
+  res.render('login')
+}
+
+// Login Handle
+exports.login = (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })(req, res, next);
+}
+
+// Logout Handle
+exports.logout = (req, res) => {
+  req.logout();
+  req.flash("success_msg", "you are logged out");
+  res.redirect("/login");
+}

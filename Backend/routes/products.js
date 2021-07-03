@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { upload } = require("../controllers/helper");
+const { upload , ensureAuthenticated} = require("../controllers/helper");
 
 const {
   renderProduct,
@@ -14,19 +14,19 @@ const {
   getImage,
 } = require("../controllers/products");
 
-router.get("/", renderProduct);
+router.get("/", ensureAuthenticated, renderProduct);
 
 router.post("/", upload, handleProductsubmit);
 
-router.get("/display", displayProduct);
+router.get("/display",ensureAuthenticated ,displayProduct);
 
 router.get("/all", get_all_products);
 
-router.get("/:id/edit", editProducts);
+router.get("/:id/edit",ensureAuthenticated ,editProducts);
 
 router.post("/:id/update", upload, updateProduct);
 
-router.delete("/:id", deleteProduct);
+router.delete("/:id", ensureAuthenticated,deleteProduct);
 
 router.get("/:prodId", get_product);
 

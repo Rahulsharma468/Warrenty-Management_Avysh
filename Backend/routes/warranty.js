@@ -9,19 +9,30 @@ const {
   updateWarrenty,
   getOneWarranty,
   getAllWarranty,
+  loginRoute,
+  login,
+  logout
 } = require("../controllers/warranty");
 
-router.get("/", renderWarranty);
+const { ensureAuthenticated} = require("../controllers/helper");
 
-router.post("/", handleSubmit);
+router.get("/", ensureAuthenticated , renderWarranty);
 
-router.get("/display", displayWarranty);
+router.post("/",handleSubmit);
 
-router.get("/:id/edit", editWarrenty);
+router.get("/display", ensureAuthenticated,displayWarranty);
 
-router.post("/:id/update", updateWarrenty);
+router.get("/:id/edit", ensureAuthenticated ,editWarrenty);
 
-router.get("/single/:id", getOneWarranty);
+router.post("/:id/update" ,updateWarrenty);
+
+router.get("/single/:id" ,getOneWarranty);
+
+router.get('/login' , loginRoute);
+
+router.post('/login' , login);
+
+router.get('/logout' , logout)
 
 router.get("/all", getAllWarranty);
 module.exports = router;
