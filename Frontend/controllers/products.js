@@ -1,4 +1,5 @@
 const { getProduct, getProducts } = require("../apicalls/products");
+const { getWarr } = require("../apicalls/warranty");
 
 const get_all_products = async (req, res) => {
   const data = await getProducts();
@@ -8,10 +9,15 @@ const get_all_products = async (req, res) => {
 };
 
 const get_one = async (req, res) => {
-  let id = req.params.prodId;
-  const data = await getProduct(id);
-  console.log(data);
-  res.render("desc", { prod: data });
+  try {
+    let id = req.params.prodId;
+    const data = await getProduct(id); //product
+    const data1 = await getWarr(data.warrantyId); //warrenty
+    console.log(data1);
+    res.render("Desc1", { prod: data1, det: data });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 module.exports = {

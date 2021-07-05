@@ -89,13 +89,14 @@ const placeOrder = async (req, res) => {
         extendDurs.push(warr.extendDur);
         extendPrice.push(warr.extendPrice);
       } else {
-        extendDurs.push();
+        extendDurs.push("");
+        extendPrice.push("");
       }
     } else {
-      warrNames.push('');
-      durations.push('');
-      extendDurs.push('');
-      extendPrice.push('');
+      warrNames.push("");
+      durations.push("");
+      extendDurs.push("");
+      extendPrice.push("");
     }
   }
   const order = new Order({
