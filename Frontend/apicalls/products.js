@@ -23,8 +23,18 @@ const getProducts = () => {
       console.log(error);
     });
 };
-
+const modifyProd = (prodId, qty) => {
+  return axios
+    .get(`${API}/product/modify/${prodId}&${qty}`)
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+};
 module.exports = {
   getProduct,
   getProducts,
+  modifyProd,
 };

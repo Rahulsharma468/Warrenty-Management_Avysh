@@ -143,6 +143,20 @@ const getImage = (req, res) => {
   res.sendFile(filename, { root: "public/uploads" });
 };
 
+const modifyQty = async (req, res) => {
+  let id = req.params.id;
+  let qty = Number(req.params.qty);
+  Product.findOneAndUpdate({ _id: id }, { $inc: { quantity: -qty } })
+    .then((result) => {
+      console.log(result);
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json({ err });
+    });
+};
+
 module.exports = {
   renderProduct,
   handleProductsubmit,
@@ -153,4 +167,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getImage,
+  modifyQty,
 };
