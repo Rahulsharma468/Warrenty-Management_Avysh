@@ -1,153 +1,16 @@
 
 {{> splash-nav}}
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html {
-  font-size: 16px;
-}
-body {
-  background-image: linear-gradient(45deg, #ffd800, #ff5520, #750cf2, #0cbcf2);
-  font-family: futura-pt, sans-serif;
-  
-}
-#container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  padding: 20px;
-  overflow: hidden;
-}
-.box {
-  position: relative;
-}
-.form-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 999;
-  width: 100%;
-  max-width: 300px;
-  padding: 30px 20px;
-  border: solid .5px #fff;
-  border-radius: 10px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, .1),-4px -4px 10px rgba(0, 0, 0, .1);
-  background-color: rgba(255, 255, 255, .1);
-  
-  backdrop-filter: blur(15px);
-}
-.ic-account {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .1);
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/System-users.svg/1024px-System-users.svg.png');
-  background-position: center;
-  background-size: 40px;
-  background-repeat: no-repeat;
-  
-  backdrop-filter: blur(15px);
-}
-.login-form-input {
-  outline: none;
-  width: 100%;
-  margin: 5px auto;
-  padding: 15px 20px;
-  border: 1px solid #fff;
-  border-radius: 25px;
-  color: #fff;
-  font-size: 1rem;
-  background-color: rgba(255, 255, 255, .1);
-  
-  backdrop-filter: blur(15px);
-}
 
-.login-form-btn {
-  width: 100%;
-  height: 50px;
-  margin: 20px auto 10px;
-  padding: 15px;
-  border: none;
-  border-radius: 25px;
-  background-color: rgb(224, 190, 190);
-  color: #3d3935;
-  font-size: 1.25rem;
-  outline: none;
-  cursor: pointer;
-}
-.text {
-  text-align: center;
-  font-size: 14px;
-  color: #FFF;
-  margin: 0;
-  padding: 0;
-}
-.text a {
-  color: #FFF;
-}
-.login-form-btn:hover,
-.text a:hover {
-  opacity: .8;
-}
-.c-1 {
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-image: linear-gradient(45deg, #ffd800, #f8744c);
-}
-.c-2 {
-  position: absolute;
-  left: -40px;
-  bottom: -40px;
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-image: linear-gradient(45deg, #0cbcf2, #750cf2);
-}
-@media screen and (max-width: 480px) {
-  #container {
-    height: auto;
-    align-items: flex-start;
-  }
-}
-</style>
-
-
-<div id="container">
-      <div class="box">
-        <div class="form-box">
-          <div class="ic-account"></div>
-          <form id="login-form" name="login-form" action="/users/login" method="POST">
-          <div>
-              <label for="email" style="color:white">Email</label>
-              <input id="email" class="login-form-input" type="email" name="email" required>
-          </div>
-          <div>
-              <label for="password" style="color:white">Password</label>
-              <input id="password" class="login-form-input" type="password" name="password"  required>
-          </div>
-            
-            
-            <button class="login-form-btn" type="submit">Login</button>
-            <p class="text"><a href="#">Forgot password?</a> or <a href="#">Sign up</a>
-          </form>
-        </div>
-        <div class="c-1"></div>
-        <div class="c-2"></div>
-      </div>
+<h1>Login</h1>
+<form method="POST"  action="/users/login">
+    <div>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" required>
     </div>
+    
+    <div>
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password" required>
+    </div>
+    <button type="submit">Submit</button>
+</form>
