@@ -80,23 +80,23 @@ const handleRegister = (req, res) => {
 
 const handleLogin = (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/item/all",
+    successRedirect: "/cart",
     failureRedirect: "/users/login",
     failureFlash: true,
   })(req, res, next);
 };
 
 const handleLogout = (req, res, next) => {
-    delete req.session.cart;
-    req.logout();
+  delete req.session.cart;
+  req.logout();
   req.flash("success_msg", "you are logged out");
   res.redirect("/users/login");
 };
 
 module.exports = {
-    login,
-    register,
-    handleRegister,
-    handleLogin,
-    handleLogout,
+  login,
+  register,
+  handleRegister,
+  handleLogin,
+  handleLogout,
 };

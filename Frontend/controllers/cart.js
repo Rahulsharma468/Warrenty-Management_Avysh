@@ -39,7 +39,6 @@ const getCart = (req, res) => {
     res.render("disp_cart", { item: {} });
   } else {
     var cart = new Cart(req.session.cart);
-    var items = cart.getItems();
     res.render("disp_cart", {
       item: cart.getItems(),
       total: cart.totalPrice,

@@ -1,4 +1,5 @@
 const express = require("express");
+const { ensureAuthenticated } = require("../config/auth");
 const router = express.Router();
 const {
   addItem,
@@ -9,7 +10,7 @@ const {
 
 router.get("/:id&:qty", addItem);
 
-router.get("/", getCart);
+router.get("/", ensureAuthenticated, getCart);
 
 router.get("/remove/:id&:qty", removeItem);
 

@@ -8,6 +8,7 @@ const productrouter = require("./routes/products");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+const { getImage } = require("./controllers/products.js");
 const app = express();
 
 // Passport config
@@ -40,13 +41,14 @@ mongoose
     console.log("Not connected ", err.message);
   });
 
-  app.use(
-    session({
-      secret: "tanjiro@384474785",
-      resave: true,
-      saveUninitialized: true,
-    })
-  );
+app.get("/image/:filename", getImage);
+app.use(
+  session({
+    secret: "tanjiro@384474785",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 // Passport middleware
 app.use(passport.initialize());
@@ -68,7 +70,6 @@ app.set("view engine", "handlebars");
 
 app.use("/", warrantyRouter);
 app.use("/product", productrouter);
-
 
 app.listen(3000, function () {
   console.log("Server running on port 3000");

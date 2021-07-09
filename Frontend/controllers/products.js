@@ -3,7 +3,7 @@ const { getWarr } = require("../apicalls/warranty");
 
 const get_all_products = async (req, res) => {
   const data = await getProducts();
-  console.log(data);
+  console.log(req.isAuthenticated());
   // return res.json(data);
   res.render("prodList", { products: data });
 };

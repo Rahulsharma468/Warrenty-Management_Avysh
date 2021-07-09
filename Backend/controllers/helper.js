@@ -50,18 +50,18 @@ const upload = multer({
   storage: storage,
 }).single("file");
 
-const ensureAuthenticated =  function(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    req.flash('error_msg', 'Please log in to view this resource');
-    res.redirect('/login');
-}
+const ensureAuthenticated = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  req.flash("error_msg", "Please log in to view this resource");
+  res.redirect("/login");
+};
 
 module.exports = {
   checkForLength,
   upload,
   getProducts,
   get_taken_products,
-  ensureAuthenticated
+  ensureAuthenticated,
 };
