@@ -12,16 +12,15 @@ const helperSchema = mongoose.Schema(
     },
     warrName: {
       type: String,
-      required: true,
     },
     warrDuration: {
       year: {
         type: Number,
-        required: true,
+        default: 0,
       },
       month: {
         type: Number,
-        required: true,
+        default: 0,
       },
     },
     extended: {
@@ -32,12 +31,10 @@ const helperSchema = mongoose.Schema(
     extendDur: {
       year: {
         type: Number,
-        required: true,
         default: 0,
       },
       month: {
         type: Number,
-        required: true,
         default: 0,
       },
     },

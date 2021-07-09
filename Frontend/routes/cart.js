@@ -8,11 +8,11 @@ const {
   placeOrder,
 } = require("../controllers/cart");
 
-router.get("/:id&:qty", addItem);
+router.get("/:id&:qty", ensureAuthenticated, addItem);
 
 router.get("/", ensureAuthenticated, getCart);
 
 router.get("/remove/:id&:qty", removeItem);
 
-router.get("/order", placeOrder);
+router.get("/order", ensureAuthenticated, placeOrder);
 module.exports = router;

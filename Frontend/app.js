@@ -9,6 +9,7 @@ const prodRouter = require("./routes/products");
 const cartRouter = require("./routes/cart");
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/users");
+const orderRouter = require("./routes/order");
 const db = require("./config/keys").MongoURI;
 const app = express();
 
@@ -56,6 +57,8 @@ app.use("/item", prodRouter);
 app.use("/users", userRouter);
 
 app.use("/cart", cartRouter);
+
+app.use("/order", orderRouter);
 
 app.listen(5000, function () {
   console.log("Server running on port 5000");

@@ -10,35 +10,49 @@ const { getWarr } = require("../apicalls/warranty");
 const addItem = async (req, res) => {
   let id = req.params.id;
   let qty = req.params.qty;
-  if (!req.user) {
-    res.render("pages/login");
+  // if (!req.user) {
+  //   res.render("pages/login");
+  // } else {
+  let cart = new Cart(req.session.cart ? req.session.cart : {});
+  const result = await getProduct(id);
+  if (Number(qty) <= result.quantity) {
+    cart.add(result, id, qty);
+    req.session.cart = cart;
+    console.log(cart);
+    res.render("disp_cart", {
+      item: cart.getItems(),
+      total: cart.totalPrice,
+      quantity: cart.totalItems,
+    });
   } else {
-    let cart = new Cart(req.session.cart ? req.session.cart : {});
-    const result = await getProduct(id);
-    if (Number(qty) <= result.quantity) {
-      cart.add(result, id, qty);
-      req.session.cart = cart;
-      console.log(cart);
-      res.render("disp_cart", {
-        item: cart.getItems(),
-        total: cart.totalPrice,
-        quantity: cart.totalItems,
-      });
-    } else {
-      res.send("<h1>Quantity Exceeded</h1>");
-    }
+    res.send("<h1>Quantity Exceeded</h1>");
   }
 };
 
 const getCart = (req, res) => {
-  if (!req.user) {
-    res.render("pages/login");
-  } else if (!req.session.cart || req.session.cart.totalItems == 0) {
+  if (!req.session.cart || req.session.cart.totalItems == 0) {
     console.log(req.user);
     console.log("No cart");
     res.render("disp_cart", { item: {} });
   } else {
     var cart = new Cart(req.session.cart);
+<<<<<<< Updated upstream
+=======
+    var items = cart.getItems();
+    console.log(items);
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     res.render("disp_cart", {
       item: cart.getItems(),
       total: cart.totalPrice,
@@ -75,7 +89,9 @@ const placeOrder = async (req, res) => {
     var help = new Helper({
       extended: false,
     });
-    if (items[i].item.hasOwnProperty("warrantyId")) {
+    let mod = modifyProd(items[i].item._id, items[i].quantity);
+    console.log(mod);
+    if (items[i].item.noWarranty === false) {
       const warr = await getWarr(items[i].item.warrantyId);
       // const prod = await getProduct(items[i].item._id);
       // var prodobj = new prodModel(prod);
@@ -83,8 +99,6 @@ const placeOrder = async (req, res) => {
       // console.log(typeof prodobj);
       // prodobj.quantity -= items[i].quantity;
       // await prodobj.save();
-      let mod = modifyProd(items[i].item._id, items[i].quantity);
-      console.log(mod);
       help.warrName = warr.name;
       help.warrDuration = warr.duration;
       if (warr.extendable) {
