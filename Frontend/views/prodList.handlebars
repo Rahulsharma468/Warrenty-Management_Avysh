@@ -44,7 +44,7 @@
 }
 </style>
 
-<div class='container-fluid'>
+{{!-- <div class='container-fluid'>
   {{#each products}}
     <div class="card mx-auto col-md-3 col-10 mt-5"> {{#with image}}
                     <td> <img src="data:image/jpeg;base64,{{this.data}}" id="product-img" width="100px" height="100px" alt="..."></td>
@@ -52,9 +52,33 @@
         <div class="card-body text-center mx-auto">
             <div class='cvp'>
                 <h5 class="card-title font-weight-bold">{{this.name}}</h5>
-                <p class="card-text">RS.{{this.price}}</p> <a href="/item/{{this._id}}" class="btn details px-auto">DETAILS</a><br /> <a href="/cart/{{this._id}}&1" class="btn cart px-auto">ADD TO CART</a>
+                <p class="card-text">RS.{{this.price}}</p> <a href="/item/{{this._id}}" class="btn details px-auto">DETAILS</a><br />
+                 <a href="/cart/{{this._id}}&1" class="btn cart px-auto">ADD TO CART</a>
             </div>
         </div>
     </div>
     {{/each}}
+</div> --}}
+
+<div class="container">
+    <div class="row ">
+        {{#each products}}
+        <div class="col-3 my-3">
+
+            <div class="card mx-auto" style="width: 15rem;">
+                {{!-- <img src="http://localhost:3000/product/image/{{image}}" class="card-img-top" alt="..." id="product-img" width="300px" height="200px" /> --}}
+                <img class="card-img-top" alt="..." width="300px" height="200px" />
+                <div class="card-body text-center mx-auto">
+
+                    <h5 class="card-title font-weight-bold">{{this.name}}</h5>
+                    <p class="card-text">Rs. {{this.price}}</p>
+                    <a href="/item/{{this._id}}" class="btn details px-auto">DETAILS</a>
+                    
+                    <a href="/cart/{{this._id}}&1" class="btn cart px-auto">ADD TO CART</a>
+                </div>
+            </div>
+
+        </div>
+        {{/each}}
+    </div>
 </div>
