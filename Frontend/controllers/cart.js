@@ -7,6 +7,7 @@ var Cart = require("../models/cart");
 var Temp = require("../models/temp");
 var Helper = require("../models/helper");
 const { getWarr } = require("../apicalls/warranty");
+
 const addItem = async (req, res) => {
   let id = req.params.id;
   let qty = req.params.qty;
@@ -19,11 +20,14 @@ const addItem = async (req, res) => {
     cart.add(result, id, qty);
     req.session.cart = cart;
     console.log(cart);
-    res.render("disp_cart", {
-      item: cart.getItems(),
-      total: cart.totalPrice,
-      quantity: cart.totalItems,
-    });
+
+    console.log(result);
+    // res.render("disp_cart", {
+    //   item: cart.getItems(),
+    //   total: cart.totalPrice,
+    //   quantity: cart.totalItems,
+    // });
+    res.redirect("/item/all");
   } else {
     res.send("<h1>Quantity Exceeded</h1>");
   }
@@ -36,23 +40,9 @@ const getCart = (req, res) => {
     res.render("disp_cart", { item: {} });
   } else {
     var cart = new Cart(req.session.cart);
-<<<<<<< Updated upstream
-=======
     var items = cart.getItems();
     console.log(items);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     res.render("disp_cart", {
       item: cart.getItems(),
       total: cart.totalPrice,

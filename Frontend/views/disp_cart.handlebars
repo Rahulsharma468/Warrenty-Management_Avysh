@@ -1,39 +1,36 @@
 <br>
 <section id="display-cart">
-{{#if item.length}}
+  {{#if item.length}}
   <table class="table table-striped mt-5">
     <thead class="thead-dark">
       <tr>
-        <th>Image</th>
-        <th>Product Name</th>
-        <th>Quantity</th>
-        <th>Price</th>
+        <th class="text-center">Image</th>
+        <th class="text-center">Product Name</th>
+        <th class="text-center">Quantity</th>
+        <th class="text-center">Price</th>
         <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       {{#each item}}
-        <tr>
-          <td>Image</td>
-          <td>{{item.name}}</td>
-          <td>{{quantity}}</td>
-          <td>{{price}}</td>
-          <td>
-            <a
-              href="/cart/remove/{{item._id}}&1"
-              style="text-decoration: none; color:inherit;"
-            ><i class="bi bi-dash"></i></a>
-          </td>
-          <td>
-            <a
-              href="/cart/remove/{{item._id}}&{{quantity}}"
-              style="text-decoration: none; color:inherit;"
-            >
-              <i class="bi bi-trash"></i>
-            </a>
-          </td>
-        </tr>
+      <tr>
+        <td class="text-center">
+          <img src="http://localhost:3000/image/{{item.image}}" alt="..." id="product-img" width="100px"
+            height="100px" /></td>
+        <td class="text-center">{{item.name}}</td>
+        <td class="text-center">{{quantity}}</td>
+        <td class="text-center">{{price}}</td>
+        <td class="text-center">
+          <a href="/cart/remove/{{item._id}}&1" style="text-decoration: none; color:inherit;"><i
+              class="bi bi-dash"></i></a>
+        </td>
+        <td class="text-center">
+          <a href="/cart/remove/{{item._id}}&{{quantity}}" style="text-decoration: none; color:inherit;">
+            <i class="bi bi-trash"></i>
+          </a>
+        </td>
+      </tr>
       {{/each}}
       <tr>
         <td></td>

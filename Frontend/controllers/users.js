@@ -80,7 +80,7 @@ const handleRegister = (req, res) => {
 
 const handleLogin = (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/cart",
+    successRedirect: "/item/all",
     failureRedirect: "/users/login",
     failureFlash: true,
   })(req, res, next);
