@@ -28,6 +28,11 @@
               <td>{{extendPrice}}</td>
               <td>{{extendDur.year}}</td>
               <td>{{extendDur.month}}</td>
+              {{#if extended}}
+              <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
+              {{else}}
+              <td style="border: none;"><a href="/order/{{../_id}}&{{@index}}"><button class="btn btn-warning">Extend</button></a></td>
+              {{/if}}
             </tr>
           {{/each}}
         </tbody>
