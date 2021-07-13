@@ -1,4 +1,4 @@
- <table class="table table-striped mt-5">
+<table class="table table-striped mt-5">
     <thead class="thead-dark">
         <tr>
             <th>Name</th>
@@ -11,37 +11,39 @@
             <th></th>
         </tr>
     </thead>
-       
+
     {{#each products}}
-        <tbody>
-            <tr>
-                <td> {{name}} </td>
-                <td> {{price}} </td>
-                <td> {{category}} </td>
-                <td> {{quantity}} </td>
-                <td> {{description}} </td>
-                <td> <img src="http://localhost:3000/product/image/{{image}}" id="product-img" width="200px" height="200px" alt="..."></td>
-                {{#if noWarranty}}
-                    <td>No</td>
-                {{else}}
-                    <td>Yes</td>
-                {{/if}}
-                <td><a href="/product/{{_id}}/edit" class="btn btn-primary mr-1 mt-4">Edit</a></td>
-                {{!-- <td>
-                    <form action="/product/{{_id}}?_method=DELETE" method="POST">
-                        <button class="btn btn-outline-danger mt-4">Remove</button>
-                    </form>
-                </td> --}}
-                {{!-- <td> <div class="mx-3 pb-3">
-                    <a href="/product/{{_id}}/edit" class="btn btn-primary mr-1">Edit</a>
-                        <form action="/product/{{_id}}?_method=DELETE" method="POST">
-                            <button class="btn btn-outline-danger">Remove</button>
-                        </form>
-                    </div>
-                </td> --}}
-            </tr>
+    <tbody>
+        <tr>
+            <td> {{name}} </td>
+            <td> {{price}} </td>
+            <td> {{category}} </td>
+            <td> {{quantity}} </td>
+            <td> {{description}} </td>
+            <td> <img src="http://localhost:3000/product/image/{{image}}" id="product-img" width="200px" height="200px"
+                    alt="..."></td>
+            {{#if noWarranty}}
+            <td>No</td>
             {{else}}
-                <h1 style="text-align: center; color: black">No Products registered</h1>
-        </tbody>
+            <td>Yes</td>
+            {{/if}}
+            <td><a href="/product/{{_id}}/edit" class="btn btn-primary mr-1 mt-4">Edit</a></td>
+            {{!-- <td>
+                <form action="/product/{{_id}}?_method=DELETE" method="POST">
+                    <button class="btn btn-outline-danger mt-4">Remove</button>
+                </form>
+            </td> --}}
+            {{!-- <td>
+                <div class="mx-3 pb-3">
+                    <a href="/product/{{_id}}/edit" class="btn btn-primary mr-1">Edit</a>
+                    <form action="/product/{{_id}}?_method=DELETE" method="POST">
+                        <button class="btn btn-outline-danger">Remove</button>
+                    </form>
+                </div>
+            </td> --}}
+        </tr>
+        {{else}}
+        <h1 style="text-align: center; color: black">No Products registered</h1>
+    </tbody>
     {{/each}}
 </table>

@@ -1,31 +1,32 @@
 <h1 style="text-align: center; color: black" class="mt-4">Login</h1>
 
 <div class="container">
-    <form method="POST"  action="/login">
+    <form method="POST" action="/login">
         <div class="form-group">
             <label for="email">Email *</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Email" />
-            </div>
-        <div>
-       {{!-- <div class="form-floating mb-3 mt-4">
-                <input type="text" class="form-control" id="password" name="password" placeholder="Email"  data-toggle="password" />
-                <label for="password">Password *</label>
-        </div> --}}
-
-        <div class="form-group">
-			<label>Password:</label>
-			<input type="password" id="password" name="password" class="form-control" data-toggle="password">
-		</div>
-
-        <div>
-         <div class="text-center" >
-               <button type="submit" class="btn btn-secondary">Submit</button>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email" />
         </div>
+        <div>
+            {{!-- <div class="form-floating mb-3 mt-4">
+                <input type="text" class="form-control" id="password" name="password" placeholder="Email"
+                    data-toggle="password" />
+                <label for="password">Password *</label>
+            </div> --}}
+
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" id="password" name="password" class="form-control" data-toggle="password">
+            </div>
+
+            <div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                </div>
     </form>
 </div>
 
 
 
 <script type="text/javascript">
-	$("#password").password('toggle');
+    $("#password").password('toggle');
 </script>

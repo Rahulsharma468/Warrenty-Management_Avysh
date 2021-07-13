@@ -3,16 +3,16 @@ const router = express.Router();
 const { upload, ensureAuthenticated } = require("../controllers/helper");
 
 const {
-  renderProduct,
-  handleProductsubmit,
-  displayProduct,
-  get_all_products,
-  get_product,
-  editProducts,
-  deleteProduct,
-  updateProduct,
-  getImage,
-  modifyQty,
+    renderProduct,
+    handleProductsubmit,
+    displayProduct,
+    get_all_products,
+    get_product,
+    editProducts,
+    deleteProduct,
+    updateProduct,
+    getImage,
+    modifyQty,
 } = require("../controllers/products");
 
 router.get("/", ensureAuthenticated, renderProduct);

@@ -2,7 +2,7 @@ const product = require("../models/product");
 const Product = require("../models/product");
 const Warranty = require("../models/warranty");
 const { checkForLength, getProducts } = require("./helper");
-const passport = require('passport')
+const passport = require("passport");
 
 exports.renderWarranty = async (req, res) => {
   const products = await getProducts();
@@ -176,9 +176,9 @@ exports.getAllWarranty = async (req, res) => {
     });
 };
 
-exports.loginRoute = (req,res) => {
-  res.render('login')
-}
+exports.loginRoute = (req, res) => {
+  res.render("login");
+};
 
 // Login Handle
 exports.login = (req, res, next) => {
@@ -187,11 +187,11 @@ exports.login = (req, res, next) => {
     failureRedirect: "/login",
     failureFlash: true,
   })(req, res, next);
-}
+};
 
 // Logout Handle
 exports.logout = (req, res) => {
   req.logout();
   req.flash("success_msg", "you are logged out");
   res.redirect("/login");
-}
+};
