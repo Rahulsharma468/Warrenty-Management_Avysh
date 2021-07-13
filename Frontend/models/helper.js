@@ -1,50 +1,47 @@
 var mongoose = require("mongoose");
-const helperSchema = mongoose.Schema(
-  {
+const helperSchema = mongoose.Schema({
     prodName: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
     quantity: {
-      type: Number,
-      required: true,
-      min: 1,
+        type: Number,
+        required: true,
+        min: 1,
     },
     warrName: {
-      type: String,
+        type: String,
     },
     warrDuration: {
-      year: {
-        type: Number,
-        default: 0,
-      },
-      month: {
-        type: Number,
-        default: 0,
-      },
+        year: {
+            type: Number,
+            default: 0,
+        },
+        month: {
+            type: Number,
+            default: 0,
+        },
     },
     extended: {
-      type: Boolean,
-      required: true,
-      default: false,
+        type: Boolean,
+        required: true,
+        default: false,
     },
     extendDur: {
-      year: {
-        type: Number,
-        default: 0,
-      },
-      month: {
-        type: Number,
-        default: 0,
-      },
+        year: {
+            type: Number,
+            default: 0,
+        },
+        month: {
+            type: Number,
+            default: 0,
+        },
     },
     extendPrice: {
-      type: Number,
-      default: 0,
+        type: Number,
+        default: 0,
     },
     _id: false,
-  },
-  { timestamps: true }
-);
+}, { timestamps: true });
 
 module.exports = mongoose.model("Helper", helperSchema);

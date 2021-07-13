@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-  login,
-  register,
-  handleRegister,
-  handleLogin,
-  handleLogout,
+    login,
+    register,
+    handleRegister,
+    handleLogin,
+    handleLogout,
 } = require("../controllers/users");
 
 router.get("/login", login);

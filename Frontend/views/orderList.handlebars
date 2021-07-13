@@ -1,52 +1,53 @@
 <section id="order-display">
   {{#if orders.length}}
-    {{#each orders}}
-      <table class="table table-striped mt-5">
-        <thead class="thead-dark">
-          <tr>
-            <th colspan="8">{{purchaseDate}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Extended</th>
-            <th>Base Year</th>
-            <th>Base Month</th>
-            <th>Extension Price</th>
-            <th>Extension Year</th>
-            <th>Extension Month</th>
-          </tr>
-          {{#each items}}
-            <tr>
-              <td>{{prodName}}</td>
-              <td>{{quantity}}</td>
-              <td>{{extended}}</td>
-              <td>{{warrDuration.year}}</td>
-              <td>{{warrDuration.month}}</td>
-              <td>{{extendPrice}}</td>
-              <td>{{extendDur.year}}</td>
-              <td>{{extendDur.month}}</td>
-              {{#if extended}}
-              <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
-              {{else}}
-              {{#if expired}}
-              <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
-              {{else}}
-              {{#if isExtendable}}
-              <td style="border: none;"><a href="/order/{{../_id}}&{{@index}}"><button class="btn btn-warning">Extend</button></a></td>
-              {{else}}
-              <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
-              {{/if}}
-              {{/if}}
-              {{/if}}
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    {{/each}}
+  {{#each orders}}
+  <table class="table table-striped mt-5">
+    <thead class="thead-dark">
+      <tr>
+        <th colspan="8">{{purchaseDate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Extended</th>
+        <th>Base Year</th>
+        <th>Base Month</th>
+        <th>Extension Price</th>
+        <th>Extension Year</th>
+        <th>Extension Month</th>
+      </tr>
+      {{#each items}}
+      <tr>
+        <td>{{prodName}}</td>
+        <td>{{quantity}}</td>
+        <td>{{extended}}</td>
+        <td>{{warrDuration.year}}</td>
+        <td>{{warrDuration.month}}</td>
+        <td>{{extendPrice}}</td>
+        <td>{{extendDur.year}}</td>
+        <td>{{extendDur.month}}</td>
+        {{#if extended}}
+        <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
+        {{else}}
+        {{#if expired}}
+        <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
+        {{else}}
+        {{#if isExtendable}}
+        <td style="border: none;"><a href="/order/{{../_id}}&{{@index}}"><button
+              class="btn btn-warning">Extend</button></a></td>
+        {{else}}
+        <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
+        {{/if}}
+        {{/if}}
+        {{/if}}
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{/each}}
   {{else}}
-    <h1>No Orders</h1>
+  <h1>No Orders</h1>
   {{/if}}
 </section>
