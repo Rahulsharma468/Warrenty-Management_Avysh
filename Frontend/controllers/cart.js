@@ -40,18 +40,6 @@ const getCart = (req, res) => {
     res.render("disp_cart", { item: {} });
   } else {
     var cart = new Cart(req.session.cart);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    var items = cart.getItems();
-    console.log(items);
-
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     res.render("disp_cart", {
       item: cart.getItems(),
       total: cart.totalPrice,
