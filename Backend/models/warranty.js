@@ -3,56 +3,51 @@ const Schema = mongoose.Schema;
 const { ObjectId } = Schema;
 
 const array = [];
-const warrSchema = new Schema(
-  {
+const warrSchema = new Schema({
     name: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
-    productIds: [
-      {
+    productIds: [{
         type: ObjectId,
         ref: "Product",
-      },
-    ],
+    }, ],
     resolution: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
     type: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
     extendable: {
-      type: Boolean,
+        type: Boolean,
     },
     duration: {
-      year: {
-        type: Number,
-        required: true,
-      },
-      month: {
-        type: Number,
-        required: true,
-      },
+        year: {
+            type: Number,
+            required: true,
+        },
+        month: {
+            type: Number,
+            required: true,
+        },
     },
     extendDur: {
-      year: {
-        type: Number,
-        required: true,
-        default: 0,
-      },
-      month: {
-        type: Number,
-        required: true,
-        default: 0,
-      },
+        year: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        month: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
     },
     extendPrice: {
-      type: Number,
+        type: Number,
     },
-  },
-  { timestamps: true }
-);
+}, { timestamps: true });
 
 module.exports = mongoose.model("Warranty", warrSchema);

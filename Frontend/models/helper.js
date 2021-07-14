@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-var schedule = require("node-schedule");
 
 const helperSchema = mongoose.Schema(
   {

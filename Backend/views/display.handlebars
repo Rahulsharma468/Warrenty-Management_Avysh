@@ -1,17 +1,17 @@
 <section id="displaywarr">
-     <table class="table table-striped mt-5">
-    <thead class="thead-dark">
-        <tr>
-            <th>Warranty Id</th>
-            <th>Warranty Name</th>
-            <th>Products</th>
-            <th>Duration</th>
-            <th>Resolution</th>
-            <th>Type</th>
-            <th>Extendable Duration</th>
-            <th>Extension Price</th>
-            <th></th>
-        </tr>
+    <table class="table table-striped mt-5">
+        <thead class="thead-dark">
+            <tr>
+                <th>Warranty Id</th>
+                <th>Warranty Name</th>
+                <th>Products</th>
+                <th>Duration</th>
+                <th>Resolution</th>
+                <th>Type</th>
+                <th>Extendable Duration</th>
+                <th>Extension Price</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             {{#each warr}}
@@ -20,14 +20,15 @@
                 <td>{{name}}</td>
                 <td>
                     <div class="dropdown">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="productsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="productsDropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Products
                         </a>
                         <div class="dropdown-menu" aria-labelledby="productsDropdown">
                             {{#each productIds}}
-                                <a class="dropdown-item" href="/product/display">{{name}}</a>
+                            <a class="dropdown-item" href="/product/display">{{name}}</a>
                             {{else}}
-                                <h6>No products</h6>
+                            <h6>No products</h6>
                             {{/each}}
                         </div>
                     </div>

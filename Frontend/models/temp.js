@@ -3,15 +3,12 @@ var helper = require("./helper");
 const moment = require("moment-timezone");
 const dateIndia = moment.tz(Date.now(), "Asia/Kolkata");
 var helperSchema = helper.schema;
-const tempSchema = mongoose.Schema(
-  {
+const tempSchema = mongoose.Schema({
     items: [helperSchema],
     purchaseDate: {
-      type: Date,
-      required: true,
-      default: dateIndia,
+        type: Date,
+        required: true,
+        default: dateIndia,
     },
-  },
-  { timestamps: true }
-);
+}, { timestamps: true });
 module.exports = mongoose.model("Order", tempSchema);
