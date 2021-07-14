@@ -1,4 +1,6 @@
 var mongoose = require("mongoose");
+var schedule = require("node-schedule");
+
 const helperSchema = mongoose.Schema(
   {
     prodName: {
@@ -42,7 +44,9 @@ const helperSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    _id: false,
+    expiryDate: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );

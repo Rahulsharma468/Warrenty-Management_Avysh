@@ -1,12 +1,11 @@
 const { getProduct, modifyProd } = require("../apicalls/products");
 const moment = require("moment-timezone");
-const dateIndia = moment.tz(Date.now(), "Asia/Kolkata");
 const tempIndia = moment.utc(Date.now()).tz("Asia/Kolkata").format();
-const prodModel = require("../../Backend/models/product");
 var Cart = require("../models/cart");
 var Temp = require("../models/temp");
 var Helper = require("../models/helper");
 const { getWarr } = require("../apicalls/warranty");
+const { scheduleNotification } = require("../config/helper");
 
 const addItem = async (req, res) => {
   let id = req.params.id;
@@ -21,7 +20,7 @@ const addItem = async (req, res) => {
     req.session.cart = cart;
     console.log(cart);
 
-    console.log(result);
+    // console.log(result);
     // res.render("disp_cart", {
     //   item: cart.getItems(),
     //   total: cart.totalPrice,
@@ -40,18 +39,10 @@ const getCart = (req, res) => {
     res.render("disp_cart", { item: {} });
   } else {
     var cart = new Cart(req.session.cart);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
     var items = cart.getItems();
     console.log(items);
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     res.render("disp_cart", {
       item: cart.getItems(),
       total: cart.totalPrice,
@@ -88,7 +79,7 @@ const placeOrder = async (req, res) => {
     var help = new Helper({
       extended: false,
     });
-    let mod = modifyProd(items[i].item._id, items[i].quantity);
+    let mod = await modifyProd(items[i].item._id, items[i].quantity);
     console.log(mod);
     if (items[i].item.noWarranty === false) {
       const warr = await getWarr(items[i].item.warrantyId);
@@ -107,6 +98,16 @@ const placeOrder = async (req, res) => {
         help.extendDur = "";
         help.extendPrice = "";
       }
+      let orderDate = temp.purchaseDate;
+      let y = orderDate.getFullYear();
+      let m = orderDate.getMonth();
+      let d = orderDate.getDate();
+
+      help.expiryDate = new Date(
+        y + help.warrDuration.year,
+        m + help.warrDuration.month,
+        d
+      );
     } else {
       help.warrName = "";
       help.warrDuration = "";
@@ -115,15 +116,22 @@ const placeOrder = async (req, res) => {
     }
     help.prodName = items[i].item.name;
     help.quantity = items[i].quantity;
-
+    // try {
+    //   help.jobObject = await scheduleNotification(help);
+    // } catch (err) {
+    //   console.log("Some error");
+    // }
+    // console.log(help, "hi");
+    await scheduleNotification(help);
     temp.items.push(help);
   }
-  console.log(temp);
+  // console.log(temp);
+
   req.user.orders.push(temp._id);
 
   await temp.save();
   await req.user.save();
-  delete req.session.cart;
+  // delete req.session.cart;
   res.redirect("/");
   // var names = [];
   // var qty = [];

@@ -97,15 +97,11 @@ const updateProduct = (req, res) => {
     category: req.sanitize(req.body.category),
     quantity: req.sanitize(req.body.quantity),
     description: req.sanitize(req.body.description),
-    image: req.sanitize(req.file.filename),
   };
 
-  // if (req.file) {
-  //   product.image = {};
-  //   var data = fs.readFileSync("public/uploads/" + req.file.filename);
-  //   product.image.data = data.toString("base64");
-  //   fs.unlinkSync("public/uploads/" + req.file.filename);
-  // }
+  if (req.file) {
+    product.image = req.sanitize(req.file.filename);
+  }
 
   if (
     !checkForLength([
@@ -114,7 +110,6 @@ const updateProduct = (req, res) => {
       product.category,
       product.quantity,
       product.description,
-      product.image,
     ])
   ) {
     res.redirect(`/product/${req.params.id}/edit`);
