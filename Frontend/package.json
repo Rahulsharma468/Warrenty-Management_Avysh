@@ -19,6 +19,7 @@
     "express-session": "^1.17.2",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.13",
+    "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
