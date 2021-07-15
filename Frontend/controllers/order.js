@@ -1,6 +1,16 @@
 var Order = require("../models/temp");
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const { rescheduleNotification } = require("../config/helper");
 
+=======
+const moment = require("moment");
+require("moment-precise-range-plugin");
+>>>>>>> Stashed changes
+=======
+const moment = require("moment");
+require("moment-precise-range-plugin");
+>>>>>>> Stashed changes
 const getList = async (req, res) => {
   let list = req.user.orders;
   let curr = Date.now();
@@ -21,10 +31,21 @@ const getList = async (req, res) => {
             m + item[j].warrDuration.month,
             d
           );
+          let timediff = newVal.getTime() - curr;
+          var today = moment();
+          var end = moment(newVal);
+          if (timediff > 0) {
+            var diff = moment.preciseDiff(today, end, true);
+            result[i].items[j].remainingTime = diff;
+            console.log(diff);
+          }
+          else{
+            result[i].items[j].remainingTime = "Expired";
+          }
           if (item[j].extendDur.year === 0 && item[j].extendDur.month === 0)
             result[i].items[j].isExtendable = false;
           else result[i].items[j].isExtendable = true;
-          if (newVal < curr) result[i].items[j].expired = true;
+          if (timediff <= 0) result[i].items[j].expired = true;
           else result[i].items[j].expired = false;
         }
       }
