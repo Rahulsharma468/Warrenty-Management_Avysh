@@ -1,16 +1,6 @@
 var Order = require("../models/temp");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-const { rescheduleNotification } = require("../config/helper");
-
-=======
 const moment = require("moment");
 require("moment-precise-range-plugin");
->>>>>>> Stashed changes
-=======
-const moment = require("moment");
-require("moment-precise-range-plugin");
->>>>>>> Stashed changes
 const getList = async (req, res) => {
   let list = req.user.orders;
   let curr = Date.now();
@@ -64,6 +54,7 @@ const extend = async (req, res) => {
   let idx = req.params.idx;
   console.log(order + " " + idx);
   let data = await Order.findOne({ _id: order });
+  console.log(data.items[idx]);
   let newVal = {
     year: data.items[idx].extendDur.year + data.items[idx].warrDuration.year,
     month: data.items[idx].extendDur.month + data.items[idx].warrDuration.month,
@@ -72,19 +63,6 @@ const extend = async (req, res) => {
   data.items[idx].extended = true;
   data.items[idx].extendDur.year = 0;
   data.items[idx].extendDur.month = 0;
-
-  let orderDate = data.purchaseDate;
-  let y = orderDate.getFullYear();
-  let m = orderDate.getMonth();
-  let d = orderDate.getDate();
-
-  data.items[idx].expiryDate = new Date(
-    y + data.items[idx].warrDuration.year,
-    m + data.items[idx].warrDuration.month,
-    d
-  );
-  rescheduleNotification(data.items[idx]);
-  console.log(data.items[idx]);
   data
     .save()
     .then((result) => {

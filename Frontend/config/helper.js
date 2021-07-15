@@ -8,7 +8,7 @@ const scheduleNotification = async(item) => {
     let d = expDate.getDate();
 
     let scheduleDate = new Date(y, m, d - 5);
-    schedule.scheduleJob(`${item._id}`, scheduleDate, function() {
+    schedule.scheduleJob(`${item._id}`, scheduleDate,async function() {
         //send notification using nodemailer
         await sendNotification() // import from mail.js
 
