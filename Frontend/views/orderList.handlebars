@@ -31,7 +31,7 @@
               <td>{{extendPrice}}</td>
               <td>{{extendDur.year}}</td>
               <td>{{extendDur.month}}</td>
-              {{#if extended}}
+              {{!-- {{#if extended}}
               <td>{{remainingTime.years}}</td>
               <td>{{remainingTime.months}}</td>
               <td>{{remainingTime.days}}</td>
@@ -51,6 +51,26 @@
               <td>{{remainingTime.months}}</td>
               <td>{{remainingTime.days}}</td>
               <td style="border: none;"><button class="btn btn-warning" disabled>Extend</button></td>
+              {{/if}}
+              {{/if}}
+              {{/if}} --}}
+              {{#if expired}}
+              <td colspan="3" style="text-align: center;">{{remainingTime}}</td>
+              {{else}}
+              {{#if extended}}
+              <td>{{remainingTime.years}}</td>
+              <td>{{remainingTime.months}}</td>
+              <td>{{remainingTime.days}}</td>
+              {{else}}
+              {{#if isExtendable}}
+              <td>{{remainingTime.years}}</td>
+              <td>{{remainingTime.months}}</td>
+              <td>{{remainingTime.days}}</td>
+              <td style="border: none;"><a href="/order/{{../_id}}&{{@index}}" style="text-decoration: none;color:inherit;"><button class="btn btn-warning">Extend</button></a></td>
+              {{else}}
+              <td>{{remainingTime.years}}</td>
+              <td>{{remainingTime.months}}</td>
+              <td>{{remainingTime.days}}</td>
               {{/if}}
               {{/if}}
               {{/if}}

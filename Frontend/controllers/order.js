@@ -3,7 +3,6 @@ const moment = require("moment");
 require("moment-precise-range-plugin");
 const getList = async (req, res) => {
   let list = req.user.orders;
-  let curr = Date.now();
   Order.find({
     _id: { $in: list },
   })
@@ -11,8 +10,8 @@ const getList = async (req, res) => {
     .then((result) => {
       for (let i = 0; i < result.length; i++) {
         let item = result[i].items;
+        let temp = result[i].purchaseDate;
         for (let j = 0; j < item.length; j++) {
-          let temp = result[i].purchaseDate;
           let y = temp.getFullYear();
           let m = temp.getMonth();
           let d = temp.getDate();
@@ -21,27 +20,43 @@ const getList = async (req, res) => {
             m + item[j].warrDuration.month,
             d
           );
-          let timediff = newVal.getTime() - curr;
+          // let timediff = newVal.getTime() - curr;
           var today = moment();
           var end = moment(newVal);
-          if (timediff > 0) {
-            var diff = moment.preciseDiff(today, end, true);
-            result[i].items[j].remainingTime = diff;
-            console.log(diff);
-          }
-          else{
+          var diff = moment.preciseDiff(today, end, true);
+          console.log(diff);
+          if (diff.firstDateWasLater) {
+            result[i].items[j].expired = true;
             result[i].items[j].remainingTime = "Expired";
+          } else {
+            if (diff.years === 0 && diff.months === 0) {
+              if (diff.days === 0) {
+                result[i].items[j].expired = true;
+                result[i].items[j].remainingTime = "Expired";
+              } else {
+                result[i].items[j].expired = false;
+                result[i].items[j].remainingTime = diff;
+              }
+            } else {
+              result[i].items[j].expired = false;
+              result[i].items[j].remainingTime = diff;
+            }
           }
+          // if (timediff > 0) {
+          //   var diff = moment.preciseDiff(today, end, true);
+          //   result[i].items[j].remainingTime = diff;
+          //   // console.log(diff);
+          // } else {
+          //   result[i].items[j].remainingTime = "Expired";
+          // }
           if (item[j].extendDur.year === 0 && item[j].extendDur.month === 0)
             result[i].items[j].isExtendable = false;
           else result[i].items[j].isExtendable = true;
-          if (timediff <= 0) result[i].items[j].expired = true;
-          else result[i].items[j].expired = false;
+          // if (timediff <= 0) result[i].items[j].expired = true;
+          // else result[i].items[j].expired = false;
         }
       }
       res.render("orderList", { orders: result });
-      // console.log(result);
-      for (let i = 0; i < result.length; i++) console.log(result[i]);
     })
     .catch((err) => {
       res.json({ err });
