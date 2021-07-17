@@ -1,10 +1,11 @@
 <section id="order-display">
   {{#if orders.length}}
     {{#each orders}}
-      <table class="table table-striped mt-5">
+    <div class="table-responsive">
+      <table class="table table-hover mt-5">
         <thead class="thead-dark">
           <tr>
-            <th colspan="11">{{purchaseDate}}</th>
+            <th colspan="12">{{purchaseDate}}</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
             <th>Remaining Years</th>
             <th>Remaining Months</th>
             <th>Remaining Days</th>
+            <th></th>
           </tr>
           {{#each items}}
             <tr>
@@ -56,11 +58,13 @@
               {{/if}} --}}
               {{#if expired}}
               <td colspan="3" style="text-align: center;">{{remainingTime}}</td>
+              <td></td>
               {{else}}
               {{#if extended}}
               <td>{{remainingTime.years}}</td>
               <td>{{remainingTime.months}}</td>
               <td>{{remainingTime.days}}</td>
+              <td></td>
               {{else}}
               {{#if isExtendable}}
               <td>{{remainingTime.years}}</td>
@@ -71,6 +75,7 @@
               <td>{{remainingTime.years}}</td>
               <td>{{remainingTime.months}}</td>
               <td>{{remainingTime.days}}</td>
+              <td></td>
               {{/if}}
               {{/if}}
               {{/if}}
@@ -78,6 +83,7 @@
           {{/each}}
         </tbody>
       </table>
+      </div>
     {{/each}}
   {{else}}
   <h1>No Orders</h1>

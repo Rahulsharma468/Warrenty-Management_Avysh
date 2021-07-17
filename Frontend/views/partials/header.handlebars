@@ -15,10 +15,14 @@
         <a class="nav-link" href="/cart/"><i class="fas fa-shopping-cart"></i> CART</a>
       </li>
       <li class="nav-item px-2">
-        <a class="nav-link" href="/users/login"><i class="fas fa-user"></i> SIGN-IN</a>
+        <a class="nav-link" href="/order/"><i class="fas fa-user"></i> Orders</a>
       </li>
       <li class="nav-item px-2">
-        <a class="nav-link" href="/order/"><i class="fas fa-user"></i> Orders</a>
+        {{#if user}}
+        <a class="nav-link" href="/users/logout"><i class="fas fa-user"></i> LOGOUT</a>
+        {{else}}
+        <a class="nav-link" href="/users/login"><i class="fas fa-user"></i> SIGN-IN</a>
+        {{/if}}
       </li>
     </ul>
   </div>

@@ -1,15 +1,18 @@
-{{> splash-nav}}
-
-<h1>Login</h1>
-<form method="POST" action="/users/login">
-    <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" required>
+<div class="d-flex justify-content-center align-items-center container" style="margin-top: 10%;">
+<div class="row">
+<center>
+<h1>Log In</h1>
+</center>
+<form method="POST" class="form-signin" name="myform" action="/users/login">
+    <div class="form-group">
+        <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+        <div id="error"></div>
     </div>
-
-    <div>
-        <label for="password">Password</label>
-        <input type="text" name="password" id="password" required>
+    <div class="form-group">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
     </div>
-    <button type="submit">Submit</button>
+    <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">New User? <a href="/users/register">Register Here</a></p>
 </form>
+</div>
+</div>

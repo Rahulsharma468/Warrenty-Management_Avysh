@@ -30,7 +30,7 @@ const handleRegister = (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render("register", {
+        res.render("pages/register", {
             errors,
             name,
             email,

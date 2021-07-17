@@ -122,7 +122,7 @@ const placeOrder = async(req, res) => {
         //   console.log("Some error");
         // }
         // console.log(help, "hi");
-        await scheduleNotification(help);
+        // await scheduleNotification(help);
         temp.items.push(help);
     }
     // console.log(temp);

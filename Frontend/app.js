@@ -44,9 +44,9 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     next();
 });
-
 app.use(function(req, res, next) {
     res.locals.session = req.session;
+    res.locals.user = req.user;
     next();
 });
 
