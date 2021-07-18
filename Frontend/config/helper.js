@@ -6,7 +6,7 @@ const schedule = async() => {
     orders.find({}).then(result => {
         let expDate = result.expiryDate;
 
-        schedule.scheduleJob(`${result._id}`, `0 0 * * *`, () => {
+        schedule.scheduleJob(`${result._id}`, `0 0 * * *`, async() => {
             let month = expDate.getMonth();
             let date = expDate.getDate();
             let year = expDate.getFullYear();
@@ -17,11 +17,11 @@ const schedule = async() => {
             const curr_year = todays_date.getFullYear();
 
             if (curr_date - date === 5 && curr_month === month && curr_year === year) {
-                await sendpendingNotification();
+                await sendpendingNotification(result.user_email);
             }
 
             if (date === 0 && year === curr_year && month === curr_month) {
-                await sendexpiredNotification();
+                await sendexpiredNotification(result.user_email);
             }
 
         })
