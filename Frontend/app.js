@@ -8,32 +8,50 @@ const passport = require("passport");
 const prodRouter = require("./routes/products");
 const cartRouter = require("./routes/cart");
 const indexRouter = require("./routes/index");
+const MongoStore = require('connect-mongo');
 const userRouter = require("./routes/users");
 const orderRouter = require("./routes/order");
 const schedule = require("node-schedule");
 const { scheduler } = require("./config/helper");
-const db = require("./config/keys").MongoURI;
+// const db = require("./config/keys").MongoURI;
+const PORT = process.env.PORT || 5000;
+
 const app = express();
+const dotenv = require('dotenv');
+
 
 require("./config/passport")(passport);
+dotenv.config()
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("Connected");
-  })
-  .catch((err) => {
-    console.log("Error " + err.message);
-  });
+    .connect(
+        process.env.MOGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+        }
+    )
+    .then(() => {
+        console.log("connected");
+    })
+    .catch((err) => {
+        console.log("Not connected ", err.message);
+    });
+
+
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-  })
+    session({
+        secret: process.env.SECRET_KEY,
+        resave: false,
+        saveUninitialized: true,
+        store: MongoStore.create({
+            mongoUrl: process.env.MOGODB_URI
+        }),
+        cookie: { maxAge: 180 * 60 * 1000 }
+    })
 );
 app.use(express.static("public"));
 
@@ -41,15 +59,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
-  res.locals.error = req.flash("error");
-  next();
+    res.locals.success_msg = req.flash("success_msg");
+    res.locals.error_msg = req.flash("error_msg");
+    res.locals.error = req.flash("error");
+    next();
 });
-app.use(function (req, res, next) {
-  res.locals.session = req.session;
-  res.locals.user = req.user;
-  next();
+app.use(function(req, res, next) {
+    res.locals.session = req.session;
+    res.locals.user = req.user;
+    next();
 });
 
 schedule.scheduleJob(`0 10 * * *`, scheduler);
@@ -64,6 +82,6 @@ app.use("/cart", cartRouter);
 
 app.use("/order", orderRouter);
 
-app.listen(5000, function () {
-  console.log("Server running on port 5000");
+app.listen(PORT, function() {
+    console.log("Server running on port 5000");
 });
