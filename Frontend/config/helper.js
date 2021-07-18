@@ -6,16 +6,23 @@ const schedule = async() => {
     orders.find({}).then(result => {
         let expDate = result.expiryDate;
 
-        let month = expDate.getMonth();
-        let date = expDate.getDate();
-        let year = expDate.getFullYear();
-
-        const todays_date = new Date();
-        const curr_month = todays_date.getMonth();
-        const curr_date = todays_date.getDate();
-        const curr_year = todays_date.getFullYear();
-
         schedule.scheduleJob(`${result._id}`, `0 0 * * *`, () => {
+            let month = expDate.getMonth();
+            let date = expDate.getDate();
+            let year = expDate.getFullYear();
+
+            const todays_date = new Date();
+            const curr_month = todays_date.getMonth();
+            const curr_date = todays_date.getDate();
+            const curr_year = todays_date.getFullYear();
+
+            if (curr_date - date === 5 && curr_month === month && curr_year === year) {
+                await sendpendingNotification();
+            }
+
+            if (date === 0 && year === curr_year && month === curr_month) {
+                await sendexpiredNotification();
+            }
 
         })
 
