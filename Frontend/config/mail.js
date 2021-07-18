@@ -1,47 +1,58 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'uchihaitachi22093@gmail.com',
-        pass: 'konnoyar@55066'
-    }
+  service: "gmail",
+  auth: {
+    user: "avyshwarrantyhelp@gmail.com",
+    pass: "avysh@2021",
+  },
 });
 
-const sendpendingNotification = (email) => {
-    var mailOptions = {
-        from: 'uchihaitachi22093@gmail.com',
-        to: email,
-        subject: 'Sending Email using Node.js',
-        text: "your Product is gonna expire in so-so days"
+const sendpendingNotification = async (user, item, order) => {
+  var mailOptions = {
+    from: "avyshwarrantyhelp@gmail.com",
+    to: user.email,
+    subject: "Warranty Expiry in 5 days!!",
+    text: `Dear ${user.name},
+    The warranty of your ${item.prodName} purchased on ${order.purchaseDate} is going to expire in 5 days. 
+Please visit http://localhost:5000 to extend or redeem your warranty.
+
+Thank you.
+
+Regards
+Avysh Help`,
+  };
+
+  await transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
     }
-
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
-}
-
-
-const sendexpiredNotification = (email) => {
-    var mailOptions = {
-        from: 'uchihaitachi22093@gmail.com',
-        to: email, //user email shd be accessed here 
-        subject: 'Sending Email using Node.js',
-        text: "your Product is gonna expire in so-so days"
-    };
-
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+  });
 };
 
+const sendexpiredNotification = async (user, item, order) => {
+  var mailOptions = {
+    from: "avyshwarrantyhelp@gmail.com",
+    to: user.email,
+    subject: "Warranty Expired!",
+    text: `Dear ${user.name},
+    The warranty of your ${item.prodName} purchased on ${order.purchaseDate} has expired. 
+
+Thank you.
+
+Regards
+Avysh Help`,
+  };
+
+  await transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
 
 module.exports = { sendpendingNotification, sendexpiredNotification };

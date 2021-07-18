@@ -1,33 +1,48 @@
-const schedule = require("node-schedule");
-const { sendNotification } = require('./mail');
-const orders = require('../models/temp');
+const { sendpendingNotification, sendexpiredNotification } = require("./mail");
+const Orders = require("../models/temp");
 
-const schedule = async() => {
-    orders.find({}).then(result => {
-        let expDate = result.expiryDate;
+const scheduler = () => {
+  Orders.find({}).then(async (result) => {
+    // let expDate = result.expiryDate;
 
-        schedule.scheduleJob(`${result._id}`, `0 0 * * *`, async() => {
-            let month = expDate.getMonth();
-            let date = expDate.getDate();
-            let year = expDate.getFullYear();
+    result.forEach((order) => {
+      order.items.map(async (item) => {
+        if (!item.expiryDate) return;
+        // console.log(item.expiryDate);
+        let expDate = item.expiryDate;
+        let month = expDate.getMonth();
+        let date = expDate.getDate();
+        let year = expDate.getFullYear();
 
-            const todays_date = new Date();
-            const curr_month = todays_date.getMonth();
-            const curr_date = todays_date.getDate();
-            const curr_year = todays_date.getFullYear();
+        const todays_date = new Date();
+        const curr_month = todays_date.getMonth();
+        const curr_date = todays_date.getDate();
+        const curr_year = todays_date.getFullYear();
 
-            if (curr_date - date === 5 && curr_month === month && curr_year === year) {
-                await sendpendingNotification(result.user_email);
-            }
+        if (
+          date - curr_date === 5 &&
+          curr_month === month &&
+          curr_year === year
+        ) {
+          await sendpendingNotification(order.user, item, order);
+        }
 
-            if (date === 0 && year === curr_year && month === curr_month) {
-                await sendexpiredNotification(result.user_email);
-            }
+        if (
+          date - curr_date === 0 &&
+          curr_month === month &&
+          curr_year === year
+        ) {
+          await sendexpiredNotification(order.user, item, order);
+        }
+      });
+    });
+    console.log("Done");
 
-        })
+    // schedule.scheduleJob(`${result._id}`, `0 10 * * *`, async () => {
 
-    })
-}
+    // });
+  });
+};
 
 // const scheduleNotification = async(item) => {
 //     let expDate = item.expiryDate;
@@ -60,6 +75,7 @@ const schedule = async() => {
 // };
 
 module.exports = {
-    scheduleNotification,
-    rescheduleNotification,
+  // scheduleNotification,
+  // rescheduleNotification,
+  scheduler,
 };
