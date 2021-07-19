@@ -1,27 +1,25 @@
 <style>
-    .banner-image {
-        padding-top: 75px;
-        padding-bottom: 10px;
-        text-align: center;
-        color: #f8f8f8;
-        background: url(https://www.digitalmenta.com/wp-content/uploads/2019/04/potenciar-campanas-shopping.jpg) no-repeat center;
-        background-size: cover;
-    }
-
-    .banner-content {
-        position: relative;
-        padding-top: 6%;
-        padding-bottom: 6%;
-        margin-top: 12%;
-        margin-bottom: 12%;
-        background-color: rgba(0, 0, 0, 0.7);
-        max-width: 660px;
-        overflow: hidden;
-    }
+  .banner-image { padding-top: 75px; padding-bottom: 10px; text-align: center;
+  color: #f8f8f8; background:
+  url(https://www.digitalmenta.com/wp-content/uploads/2019/04/potenciar-campanas-shopping.jpg)
+  no-repeat center; background-size: cover; } .banner-content { position:
+  relative; padding-top: 6%; padding-bottom: 6%; margin-top: 12%; margin-bottom:
+  12%; background-color: rgba(0, 0, 0, 0.7); max-width: 660px; overflow: hidden;
+  } .angled-gradient-button { background-size: 220%; box-shadow: 0 .2em .3em
+  rgba(0, 0, 0, 0.15); color: white; background-color: black;
+  background-position: 100%; border: 3px solid black; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 3px; transition: all .2s ease-out;
+  font-weight: 900; cursor: pointer; letter-spacing: 2px; background-image:
+  linear-gradient(110deg, black 0%, black 50%, transparent 50%, transparent
+  100%); font-size: 14px; } .angled-gradient-button:hover { transform:
+  translateY(-2px); box-shadow: 0 0 .3em rgba(0, 0, 0, 0.25); background-color:
+  yellow; background-position: 0; color: #fff; } .angled-gradient-button:active
+  { transform: translateY(-1px); } .full-width { width: 99.4vw; position:
+  relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
 </style>
 <main>
 
-    <section class="banner-image">
+  {{! <section class="banner-image">
         <div class="container">
             <div class="banner-content">
                 <h1>We sell lifestyle</h1>
@@ -29,6 +27,48 @@
                 <a href="/item/all" class="btn btn-danger btn-lg active">Shop Now</a>
             </div>
         </div>
-    </section>
-
+    </section> }}
+  <header class="masthead full-width">
+    <div class="container position-relative">
+      <div class="row justify-content-center">
+        <div class="col-xl-6">
+          <div class="text-center text-white">
+            <!-- Page heading-->
+            <h1 class="mb-5">Welcome To Shopfront!</h1>
+            <a
+              href="/item/all"
+              style="text-decoration: none;color:inherit;"
+            ><button class="btn btn-lg angled-gradient-button">Shop Now</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="features-icons bg-light text-center full-width">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi bi-truck m-auto text-primary"></i></div>
+                            <h3>Rapid Delivery</h3>
+                            <p class="lead mb-0">From the warehouse to your doorstep, in no time!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi bi-cart m-auto text-primary"></i></div>
+                            <h3>Huge Variety</h3>
+                            <p class="lead mb-0">Choose from a wide range of products!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi bi-calendar-event m-auto text-primary"></i></div>
+                            <h3>Warranty Tracking</h3>
+                            <p class="lead mb-0">Keep track of your warranties, and extend them with a single click!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 </main>

@@ -56,6 +56,9 @@
               {{/if}}
               {{/if}}
               {{/if}} --}}
+              {{#if noWarr}}
+                <td colspan="3" style="text-align: center;">No Warranty</td>
+              {{else}}
               {{#if expired}}
               <td colspan="3" style="text-align: center;">{{remainingTime}}</td>
               <td></td>
@@ -76,6 +79,7 @@
               <td>{{remainingTime.months}}</td>
               <td>{{remainingTime.days}}</td>
               <td></td>
+              {{/if}}
               {{/if}}
               {{/if}}
               {{/if}}

@@ -20,6 +20,10 @@ const getList = async (req, res) => {
             m + item[j].warrDuration.month,
             d
           );
+          if(item[j].warrDuration.year === 0 && item[j].warrDuration.month === 0)
+            result[i].items[j].noWarr = true;
+          else
+            result[i].items[j].noWarr = false;
           // let timediff = newVal.getTime() - curr;
           var today = moment();
           var end = moment(newVal);
