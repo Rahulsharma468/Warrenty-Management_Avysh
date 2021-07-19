@@ -40,7 +40,7 @@ mongoose
 
 
 app.use(bodyparser.urlencoded({ extended: true }));
-app.engine("handlebars", exphbs());
+app.engine("handlebars", exphbs({helpers: require('./config/hbhelp')}));
 app.set("view engine", "handlebars");
 app.use(
     session({

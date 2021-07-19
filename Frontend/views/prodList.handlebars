@@ -4,23 +4,20 @@
     }
 
     .details {
-        border: 1.5px solid grey;
-        color: #212121;
+        background-color: white;
+        color: red;
         width: 100%;
         height: auto;
-        box-shadow: 0px 0px 10px #212121
     }
 
     .cart {
-        background-color: #212121;
-        color: white;
+        color: green;
         margin-top: 10px;
         font-size: 12px;
         font-weight: 900;
         width: 100%;
         height: 39px;
         padding-top: 9px;
-        box-shadow: 0px 5px 10px #212121
     }
 
     .card {
@@ -34,7 +31,14 @@
     .btn {
         border-radius: 0
     }
-
+    .cart:hover{
+        background-color: white;
+        color: white;
+    }
+    .details:hover{
+        background-color: black;
+        color: white;
+    }
     .img-thumbnail {
         border: none
     }
@@ -77,9 +81,12 @@
 
                     <h5 class="card-title font-weight-bold">{{this.name}}</h5>
                     <p class="card-text">Rs. {{this.price}}</p>
-                    <a href="/item/{{this._id}}" class="btn details px-auto">DETAILS</a>
-
-                    <a href="/cart/{{this._id}}&1" class="btn cart px-auto">ADD TO CART</a>
+                    <a href="/item/{{this._id}}" style="text-decoration: none; color: inherit;"><button class="btn details angled-gradient-button px-auto">Details</button></a>
+                    {{#ifeq this.quantity 0}}
+                    <a href="javascript:void(0)" style="text-decoration: none;color:inherit;pointer-events: none;"><button style="color: black;" class="btn cart angled-gradient-button px-auto" disabled>OUT OF STOCK</button></a>
+                    {{else}}
+                    <a href="/cart/{{this._id}}&1" style="text-decoration: none;color:inherit;"><button class="btn cart angled-gradient-button px-auto">ADD TO CART</button></a>
+                    {{/ifeq}}
                 </div>
             </div>
 

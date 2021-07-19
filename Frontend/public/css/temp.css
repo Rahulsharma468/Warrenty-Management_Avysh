@@ -170,3 +170,31 @@ body {
   font-size: 18px;
   font-weight: 300;
 }
+.angled-gradient-button {
+  background-size: 220%;
+  box-shadow: 0 .2em .3em rgba(0, 0, 0, 0.15);
+  color: black;
+  background-color: transparent;
+  background-position: 100%;
+  border: 3px solid black;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 3px;
+  transition: all .2s ease-out;
+  font-weight: 900;
+  cursor: pointer;
+  letter-spacing: 2px;
+  background-image: linear-gradient(110deg, black 0%, black 50%, transparent 50%, transparent 100%);
+  font-size: 14px;
+}
+
+.angled-gradient-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 .3em rgba(0, 0, 0, 0.25);
+  background-position: 0;
+  color: #fff;
+}
+
+.angled-gradient-button:active {
+  transform: translateY(-1px);
+}

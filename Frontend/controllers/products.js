@@ -13,8 +13,8 @@ const get_one = async(req, res) => {
         let id = req.params.prodId;
         const data = await getProduct(id); //product
         const data1 = await getWarr(data.warrantyId); //warrenty
-        console.log(data1);
-        res.render("Desc1", { prod: data1, det: data });
+        console.log(data);
+        res.render("prodDesc", { prod: data1, det: data });
     } catch (e) {
         console.log(e);
     }
