@@ -18,9 +18,6 @@ var methodOverride = require("method-override");
 
 app.use(expressSanitizer());
 
-app.use(bodyparser.urlencoded({ extended: true }));
-app.engine("handlebars", exphbs());
-
 app.use(methodOverride("_method"));
 
 mongoose.Promise = global.Promise;
@@ -41,7 +38,11 @@ mongoose
     console.log("Not connected ", err.message);
   });
 
+app.use(bodyparser.urlencoded({ extended: true }));
 app.get("/image/:filename", getImage);
+
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
 app.use(
   session({
     secret: "tanjiro@384474785",
@@ -50,23 +51,22 @@ app.use(
   })
 );
 
-// Passport middleware
+app.use(express.static("public"));
+
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Connect flash
 app.use(flash());
-
-// Global Vars
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
   next();
 });
-
-app.use(express.static("public"));
-app.set("view engine", "handlebars");
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  res.locals.user = req.user;
+  next();
+});
 
 app.use("/", warrantyRouter);
 app.use("/product", productrouter);

@@ -14,10 +14,11 @@
       <a class="nav-link" href="/product/display">Display product</a>
     </li>
     <li class="nav-item">
+      {{#if user}}
+      <a class="nav-link" href="/logout">Logout</a>
+      {{else}}
       <a class="nav-link" href="/login">Login</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/logout"><button class="btn"></button>Logout</button></a>
+      {{/if}}
     </li>
   </ul>
 </nav>
