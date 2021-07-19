@@ -1,0 +1,199 @@
+<style>
+
+.hedding {
+    font-size: 20px;
+    color: #ab8181`;
+}
+
+.main-section {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 5%);
+}
+
+.left-side-product-box img {
+    width: 100%;
+}
+
+.left-side-product-box .sub-img img {
+    margin-top: 5px;
+    width: 83px;
+    height: 100px;
+}
+
+.right-side-pro-detail span {
+    font-size: 15px;
+}
+
+.right-side-pro-detail p {
+    font-size: 25px;
+    color: #a1a1a1;
+}
+
+.right-side-pro-detail .price-pro {
+    color: #E45641;
+}
+
+.right-side-pro-detail .tag-section {
+    font-size: 18px;
+    color: #5D4C46;
+}
+
+.pro-box-section .pro-box img {
+    width: 100%;
+    height: 200px;
+}
+table{
+    text-align: center;
+}
+
+
+@media (min-width:360px) and (max-width:640px) {
+    .pro-box-section .pro-box img {
+        height: auto;
+    }
+}
+</style>
+<div class="container">
+    <div class="col-lg-8  p-3 main-section bg-white">
+        
+        <div class="row m-0">
+            <div class="col-lg-4 left-side-product-box pb-3">
+                <img src="http://localhost:3000/image/{{det.image}}" class=" p-3">
+
+            </div>
+            <div class="col-lg-8">
+                <div class="right-side-pro-detail  p-3 m-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="m-0 p-0">{{det.name}}</p>
+                        </div>
+                        <br>
+                        <div class="col-lg-12">
+                            <p class="m-0 p-0 price-pro">₹ {{det.price}}</p>
+                            <hr class="p-0 m-0">
+                        </div>
+                        <br>
+                        <div class="col-lg-12 pt-2">
+                            <h5>Product Details</h5>{{det.description}}</span>
+                            <hr class="m-0 pt-2 mt-2">
+                        </div>
+                        <div class="col-lg-12">
+                            <p class="tag-section"><strong>Tag : </strong>{{det.category}}</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <h6>Quantity :</h6>
+                            <div class="form-control text-center w-100" >1</div>
+                        </div>
+                        <br><br><br>
+                        <div class="col-lg-12 mt-3">
+                            <div class="row">
+                                <div class="col-lg-12 pb-2">
+                                    <a href="/cart/{{det._id}}&1" class="btn btn-block btn-outline-primary angled-gradient-button w-100">Add To Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center pt-3">
+                <h4>WARRANTY DETAILS</h4>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            {{#if det.noWarranty}}
+            <center><h5 style="color: red;">No Warranty</h5></center>
+            {{else}}
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Duration</th>
+                        <th>Resolution</th>
+                        <th>Type</th>
+                        {{#if prod.extendable}}
+                        <th>Extendable Time</th>
+                        <th>Extension Cost</th>
+                        {{/if}}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{prod.duration.year}} Year(s) {{#if prod.duration.month}} {{prod.duration.month}} month(s){{/if}}</td>
+                        <td>{{prod.resolution}}</td>
+                        <td>{{prod.type}}</td>
+                        {{#if prod.extendable}}
+                        <td>{{prod.extendDur.year}} Year(s)
+                                    {{#if prod.extendDur.month }}
+                                    {{prod.extendDur.month}} month(s)
+                                    {{/if}}
+                        </td>
+                        <td>
+                            {{#if prod.extendPrice}}
+                                ₹ {{prod.extendPrice}}
+                                {{else}}
+                                Free
+                                {{/if}}
+                        </td>
+                        {{/if}}
+                    </tr>
+                </tbody>
+            </table>
+            {{/if}}
+        </div>
+            {{!-- <table>
+                            <tr>
+                                <td>Duration</td>
+                                <td>{{prod.duration.year}}Year
+                                    {{#if prod.duration.month }}
+                                    {{prod.duration.month}}month
+                                    {{else}}
+
+
+                                    {{/if}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Resolution</td>
+                                <td>{{prod.resolution}}</td>
+                            </tr>
+                            <tr>
+                                <td>Type</td>
+                                <td>{{prod.type}}</td>
+                            </tr>
+                            {{#if prod.extendable}}
+                            <tr>
+
+                            <tr>
+                                <td>Extendable Time</td>
+                                <td>{{prod.extendDur.year}}Year
+                                    {{#if prod.extendDur.month }}
+                                    {{prod.extendDur.month}}month
+                                    {{else}}
+
+
+                                    {{/if}}
+                                </td>
+                            </tr>
+                            </tr>
+                            <tr>
+                                <td>Extra Price</td>
+                                {{#if prod.extendPrice}}
+                                <td>Rs.{{prod.extendPrice}}</td>
+                                {{else}}
+                                <td> We'll do free of cost</td>
+                                {{/if}}
+                            </tr>
+                            {{else}}
+                            <tr>
+                                <td style="color:red;text-align:center">NOTE</td>
+                                <td style="color:red">Unextendable</td>
+                            </tr>
+                            {{/if}}
+                        </table> --}}
+        </div>
+    </div>
+</div>
