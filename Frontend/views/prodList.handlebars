@@ -71,9 +71,9 @@
 <div class="container">
     <div class="row ">
         {{#each products}}
-        <div class="col-3 my-3">
+        <div class="col-lg-4 col-md-12 my-3">
 
-            <div class="card mx-auto" style="width: 15rem;">
+            <div class="card mx-auto" style="width: 15rem;" onclick="/item/{{this._id}}">
                 <img src="https://warrenty-backend.herokuapp.com/image/{{image}}" class="card-img-top" alt="..." id="product-img"
                     width="300px" height="200px" />
                 {{!-- <img class="card-img-top" alt="..." width="300px" height="200px" /> --}}

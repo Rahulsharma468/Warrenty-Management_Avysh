@@ -1,29 +1,54 @@
-<nav class="navbar navbar-expand-sm navbar-inverse bg-dark navbar-dark navbar-fixed-top static-top">
+<nav
+  class="navbar navbar-expand-sm navbar-inverse bg-dark navbar-dark navbar-fixed-top static-top"
+>
 
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/"><img
-          src="https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/06/floral-logo.jpg" alt="" width="50"
-          height="44" style="border-radius: 50%;" class="d-inline-block align-text-top"></a>
+          src="https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/06/floral-logo.jpg"
+          alt=""
+          width="50"
+          height="44"
+          style="border-radius: 50%;"
+          class="d-inline-block align-text-top"
+        /></a>
     </div>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active px-2">
-        <a class="nav-link" href="/item/all"><i class="fas fa-home"></i> HOME<span class="sr-only">(current)</span></a>
-      </li>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active px-2">
+          <a class="nav-link" href="/item/all"><i class="fas fa-home"></i>
+            HOME<span class="sr-only">(current)</span></a>
+        </li>
 
-      <li class="nav-item px-2">
-        <a class="nav-link" href="/cart/"><i class="fas fa-shopping-cart"></i> CART</a>
-      </li>
-      <li class="nav-item px-2">
-        <a class="nav-link" href="/order/"><i class="fas fa-user"></i> ORDERS</a>
-      </li>
-      <li class="nav-item px-2">
-        {{#if user}}
-        <a class="nav-link" href="/users/logout"><i class="fas fa-user"></i> LOGOUT</a>
-        {{else}}
-        <a class="nav-link" href="/users/login"><i class="fas fa-user"></i> SIGN-IN</a>
-        {{/if}}
-      </li>
-    </ul>
+        <li class="nav-item px-2">
+          <a class="nav-link" href="/cart/"><i class="fas fa-shopping-cart"></i>
+            CART</a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link" href="/order/"><i class="fas fa-user"></i>
+            ORDERS</a>
+        </li>
+        <li class="nav-item px-2">
+          {{#if user}}
+            <a class="nav-link" href="/users/logout"><i class="fas fa-user"></i>
+              LOGOUT</a>
+          {{else}}
+            <a class="nav-link" href="/users/login"><i class="fas fa-user"></i>
+              SIGN-IN</a>
+          {{/if}}
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

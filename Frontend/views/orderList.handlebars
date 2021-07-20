@@ -8,7 +8,7 @@
             <th colspan="12">{{purchaseDate}}</th>
           </tr>
         </thead>
-        <tbody>
+        <thead class="thead-light text-center">
           <tr>
             <th>Product Name</th>
             <th>Quantity</th>
@@ -23,14 +23,28 @@
             <th>Remaining Days</th>
             <th></th>
           </tr>
+          </thead>
+          <tbody class="text-center">
           {{#each items}}
             <tr>
               <td>{{prodName}}</td>
               <td>{{quantity}}</td>
-              <td>{{extended}}</td>
+              {{#if extended}}
+              <td><i class="bi bi-check-lg" style="color: green;"></i></td>
+              {{else}}
+              {{#if isExtendable}}
+              <td><i class="bi bi-x-lg" style="color: red;"></i></td>
+              {{else}}
+              <td><i class="bi bi-dash-lg"></i></td>
+              {{/if}}
+              {{/if}}
               <td>{{warrDuration.year}}</td>
               <td>{{warrDuration.month}}</td>
+              {{#if extendPrice}}
               <td>{{extendPrice}}</td>
+              {{else}}
+              <td><i class="bi bi-dash-lg"></i></td>
+              {{/if}}
               <td>{{extendDur.year}}</td>
               <td>{{extendDur.month}}</td>
               {{!-- {{#if extended}}
@@ -57,10 +71,10 @@
               {{/if}}
               {{/if}} --}}
               {{#if noWarr}}
-                <td colspan="3" style="text-align: center;">No Warranty</td>
+                <td colspan="3" class="bg-danger" style="text-align: center; color: white;">No Warranty</td>
               {{else}}
               {{#if expired}}
-              <td colspan="3" style="text-align: center;">{{remainingTime}}</td>
+              <td colspan="3" class="bg-danger" style="text-align: center;color: white;">{{remainingTime}}</td>
               <td></td>
               {{else}}
               {{#if extended}}
