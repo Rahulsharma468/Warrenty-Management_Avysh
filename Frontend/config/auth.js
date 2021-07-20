@@ -8,3 +8,10 @@ module.exports = {
         res.redirect("/users/login");
     },
 };
+
+
+// cloudinary.config({
+//     cloud_name: 'warrentymanagement',
+//     api_key: '232167499544133',
+//     api_secret: '_cpUyJhOFDt1jD8AG_zOGDGcyjw'
+// });
