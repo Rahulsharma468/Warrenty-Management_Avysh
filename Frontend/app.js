@@ -65,7 +65,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-schedule.scheduleJob(`0/5 * * * * *`, scheduler);
+schedule.scheduleJob(`0 10 * * *`, scheduler);
 
 app.use("/", indexRouter);
 
