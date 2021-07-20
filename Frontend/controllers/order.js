@@ -68,6 +68,29 @@ const getList = async (req, res) => {
     });
 };
 
+// const extend = async (req, res) => {
+//   let order = req.params.ordId;
+//   let idx = req.params.idx;
+//   console.log(order + " " + idx);
+//   let data = await Order.findOne({ _id: order });
+//   console.log(data.items[idx]);
+//   let newVal = {
+//     year: data.items[idx].extendDur.year + data.items[idx].warrDuration.year,
+//     month: data.items[idx].extendDur.month + data.items[idx].warrDuration.month,
+//   };
+//   data.items[idx].warrDuration = newVal;
+//   data.items[idx].extended = true;
+//   data.items[idx].extendDur.year = 0;
+//   data.items[idx].extendDur.month = 0;
+//   data
+//     .save()
+//     .then((result) => {
+//       res.redirect("/order");
+//     })
+//     .catch((err) => {
+//       res.json({ err });
+//     });
+// };
 const extend = async (req, res) => {
   let order = req.params.ordId;
   let idx = req.params.idx;
@@ -82,6 +105,17 @@ const extend = async (req, res) => {
   data.items[idx].extended = true;
   data.items[idx].extendDur.year = 0;
   data.items[idx].extendDur.month = 0;
+
+  let orderDate = data.purchaseDate;
+  let y = orderDate.getFullYear();
+  let m = orderDate.getMonth();
+  let d = orderDate.getDate();
+
+  data.items[idx].expiryDate = new Date(
+    y + data.items[idx].warrDuration.year,
+    m + data.items[idx].warrDuration.month,
+    d
+  );
   data
     .save()
     .then((result) => {
@@ -91,5 +125,4 @@ const extend = async (req, res) => {
       res.json({ err });
     });
 };
-
 module.exports = { getList, extend };
