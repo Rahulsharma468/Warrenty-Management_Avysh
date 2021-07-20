@@ -1,16 +1,19 @@
 const nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  pool: true,
   auth: {
-    user: "avyshwarrantyhelp@gmail.com",
+    user: "warrantyhelpavysh@gmail.com",
     pass: "avysh@2021",
   },
 });
 
 const sendpendingNotification = async (user, item, order) => {
   var mailOptions = {
-    from: "avyshwarrantyhelp@gmail.com",
+    from: "warrantyhelpavysh@gmail.com",
     to: user.email,
     subject: "Warranty Expiry in 5 days!!",
     text: `Dear ${user.name},
@@ -34,7 +37,7 @@ Avysh Help`,
 
 const sendexpiredNotification = async (user, item, order) => {
   var mailOptions = {
-    from: "avyshwarrantyhelp@gmail.com",
+    from: "warrantyhelpavysh@gmail.com",
     to: user.email,
     subject: "Warranty Expired!",
     text: `Dear ${user.name},
