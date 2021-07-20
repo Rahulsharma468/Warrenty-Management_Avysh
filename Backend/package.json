@@ -14,6 +14,7 @@
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cloudinary": "^1.26.2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.4.1",
     "cors": "^2.8.5",

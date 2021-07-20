@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const multer = require("multer");
+const cloudinary = require("cloudinary");
 
 const checkForLength = (arr) => {
     for (var e of arr)
@@ -59,12 +60,40 @@ const ensureAuthenticated = function(req, res, next) {
     res.redirect("/login");
 };
 
+
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+});
+
+const imageuploads = (file) => {
+    return new Promise(resolve => {
+        cloudinary.uploader.upload(file, (result) => {
+            resolve({ url: result.url, id: result.public_id })
+        }, { resource_type: "auto" })
+    })
+}
+
+const updateImage = (id, file) => {
+    cloudinary.uploader.destroy(id).then(() => {
+            imageuploads(file);
+        })
+        .catch(err => {
+            console.log("cloidignary err", err.message)
+        })
+}
+
+
 module.exports = {
     checkForLength,
     upload,
     getProducts,
     get_taken_products,
     ensureAuthenticated,
+    imageuploads,
+    updateImage
 };
 
 //email = warrentymanagement.orders@gmail.com
