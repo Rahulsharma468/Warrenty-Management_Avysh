@@ -1,5 +1,6 @@
 var Order = require("../models/temp");
-const moment = require("moment");
+// const moment = require("moment");
+const moment = require("moment-timezone")
 require("moment-precise-range-plugin");
 const getList = async (req, res) => {
   let list = req.user.orders;
@@ -11,6 +12,7 @@ const getList = async (req, res) => {
       for (let i = 0; i < result.length; i++) {
         let item = result[i].items;
         let temp = result[i].purchaseDate;
+        result[i].purchaseDate = moment(temp).tz("Asia/Kolkata").format("dddd, MMMM Do YYYY, h:mm:ss a");
         for (let j = 0; j < item.length; j++) {
           let y = temp.getFullYear();
           let m = temp.getMonth();

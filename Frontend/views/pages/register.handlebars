@@ -1,12 +1,50 @@
+<script>
+  /*function checkValid(){
+  var pw1 = document.getElementById('pw').value;
+  var pw2 = document.getElementById('password2').value;
+  if(pw1 == pw2){return true;}
+  document.getElementById("password2").setAttribute("isvalid","false");
+  return false;
+  }*/
+  function checkPass(){
+    var pw1 = $("#pw").val();
+    var pw2 = $("#password2").val();
+    if(pw1!=pw2){
+      $("#pw").css("border","3px solid red");
+      $("#password2").css("border","3px solid red");
+      return false;
+    }
+    else{
+      $("#pw").css("border","3px solid green");
+      $("#password2").css("border","3px solid green");
+      return true;
+    }
+  }
+  $(document).ready(function(){
+    $("#pw","#pw2").keyup(checkPass);
+  })
+</script>
+{{#if errors}}
+    <center>
+    <div class="alert alert-danger alert-dismissible fade show col-md-4 col-md-offset-4" style="margin:2%" role="alert">
+    Email already in use!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    </center>
+  {{/if}}
+
 <div
   class="d-flex justify-content-center align-items-center container"
-  style="margin-top: 10%;"
+  style="margin-top: 6%;"
 >
   <div class="row">
+    
     <center>
       <h1>Register</h1>
     </center>
-    <form method="POST" class="form-signin" action="/users/register">
+    <form method="POST" class="form-signin" id="regform" action="/users/register" onsubmit="return checkPass()" data-parsley-validate>
       <div class="form-group">
         <input
           type="text"
@@ -14,7 +52,7 @@
           id="name"
           class="form-control"
           placeholder="Name"
-          required
+          required=""
         />
       </div>
       <div class="form-group">
@@ -24,7 +62,7 @@
           name="email"
           id="email"
           placeholder="Email"
-          required
+          required=""
         />
       </div>
 
@@ -33,9 +71,11 @@
           class="form-control"
           type="password"
           name="password"
-          id="password"
+          id="pw"
+          autocomplete="off"
           placeholder="Password"
-          required
+          required=""
+          minlength="6"
         />
       </div>
       <div class="form-group">
@@ -44,8 +84,12 @@
           type="password"
           name="password2"
           id="password2"
+          autocomplete="off"
+          onchange="checkPass();"
           placeholder="Re-enter Password"
-          required
+          required=""
+          minlength="6"
+          data-parsley-equalto="#pw"
         />
       </div>
       <button
