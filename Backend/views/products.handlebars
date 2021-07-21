@@ -1,11 +1,11 @@
 <h1 style="text-align: center; color: black" class="mt-4">Products</h1>
 <div class="jumbotron">
     <h6 class="text-danger">{{error}}</h6>
-    <form action="/product" method="post" role="form" enctype="multipart/form-data">
+    <form action="/product" method="POST" role="form" enctype="multipart/form-data">
         <div class="form-floating mb-3 mt-4">
             <div class="form-group">
-                <label for="image">Product Image *</label>
-                <input type="file" class="form-control-file" id="image" name="file">
+                <label for="file">Product Image *</label>
+                <input type="file" class="form-control-file" id="file" name="file">
             </div>
             {{!-- <div class="custom-file">
                 <input type="file" class="custom-file-input" id="image" name="image">

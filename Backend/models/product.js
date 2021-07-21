@@ -5,6 +5,7 @@ const { ObjectId } = Schema;
 let productSchema = new Schema({
     image: {
         type: String,
+        required: true
     },
     name: {
         type: String,
@@ -28,6 +29,10 @@ let productSchema = new Schema({
     description: {
         type: String,
         required: true,
+    },
+    public_id: {
+        type: String,
+        required: true
     },
     warrantyId: {
         type: ObjectId,
