@@ -21,28 +21,35 @@ const handleProductsubmit = (req, res) => {
     if (checkForLength([name, price, quantity, category, description])) {
         console.log("Ready");
 
-        const newProduct = new Product({
-            name,
-            image,
-            price,
-            quantity,
-            category,
-            description,
-        });
+        if (req.file) {
+            imageuploads(req.file.path).then(result => {
+                const newProduct = new Product({
+                    name,
+                    image: result.url,
+                    price,
+                    public_id: result.id,
+                    quantity,
+                    category,
+                    description,
+                });
 
-        // var data = fs.readFileSync("public/uploads/" + image);
-        // newProduct.image.data = data.toString("base64");
-        // fs.unlinkSync("public/uploads/" + image);
+                // var data = fs.readFileSync("public/uploads/" + image);
+                // newProduct.image.data = data.toString("base64");
+                // fs.unlinkSync("public/uploads/" + image);
 
-        newProduct
-            .save()
-            .then(() => {
-                console.log("Saved");
-                res.redirect("/product/display");
+                newProduct
+                    .save()
+                    .then(() => {
+                        console.log("Saved");
+                        res.redirect("/product/display");
+                    })
+                    .catch((err) => {
+                        console.log("Error", err.message);
+                    });
             })
-            .catch((err) => {
-                console.log("Error", err.message);
-            });
+        } else {
+            console.log("no file slecetd")
+        }
     } else {
         res.render("products", { error: "Please fill all the fields" });
     }
